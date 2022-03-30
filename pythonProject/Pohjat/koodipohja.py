@@ -7,9 +7,10 @@ Email:  eetu.kuittinen@tuni.fi
 TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 """
 
+
 def main():
     pass
 
+
 if __name__ == "__main__":
     main()
-
