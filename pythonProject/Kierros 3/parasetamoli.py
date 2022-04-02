@@ -8,6 +8,7 @@ Ohjelman tarkoitus on annostella parasetamolia potilaalle.
 """
 
 YKSITTAINEN_ANNOS = 15
+PAIVITTAINEN_MAKSIMIANNOS = 4000
 
 
 def calculate_dose(str_paino, str_aika, str_annos_viimeiset_24h):
@@ -18,25 +19,74 @@ def calculate_dose(str_paino, str_aika, str_annos_viimeiset_24h):
     aika = int(str_aika)
     annos_viimeiset_24h = int(str_annos_viimeiset_24h)
 
-    # Omia muuttujia
-    voidaanko_taysi_annos_antaa = True
-    kokonaisannos = 0
+    # Omat muuttujat
+    annettava_annos = 1
+    annettu_kerta_annos = 1
+    jaljella_annettavaa = 1
+    maksimi_kerta_annos = paino * 15
+    maksimi_vuorokausiannos = 4 * maksimi_kerta_annos
+    voidaanko_laaketta_antaa = True
 
-    # Jos lihava
-    if (paino * YKSITTAINEN_ANNOS) > 4000:
-        voidaanko_taysi_annos_antaa = False
+    if aika < 6:
+        voidaanko_laaketta_antaa = False
 
-    return kokonaisannos
+    if annos_viimeiset_24h == 4000:
+        voidaanko_laaketta_antaa = False
+
+    if 6 < aika < 12:
+        kuluneet_annoskerrat = 1
+
+    if 12 < aika < 16:
+        kuluneet_annoskerrat = 2
+
+    if 16 < aika < 24:
+        kuluneet_annoskerrat = 3
+
+    if aika == 24:
+        kuluneet_annoskerrat = 4
+
+    print("Kuluneet annoskerrat: ", kuluneet_annoskerrat)
+    print("Maksimi kerta-annos: ", maksimi_kerta_annos)
+
+    if maksimi_kerta_annos * 4 > 4000:
+        maksimi_vourokausiannos = 4000
+    else:
+        maksimi_vuorokausiannos = maksimi_kerta_annos * 4
+
+    print("Maksimi vuorokausiannos: ", maksimi_vourokausiannos)
+    print("Annos viimeiset 24h: ", annos_viimeiset_24h)
+
+    jaljella_annettavaa = maksimi_vuorokausiannos - annos_viimeiset_24h
+
+    print("Jäljellä annettavaa: ", jaljella_annettavaa)
+    if jaljella_annettavaa >= maksimi_kerta_annos and kuluneet_annoskerrat < 4:
+        annettava_annos = maksimi_kerta_annos
+
+    elif jaljella_annettavaa < maksimi_kerta_annos:
+        annettava_annos = maksimi_kerta_annos - jaljella_annettavaa
+
+    if voidaanko_laaketta_antaa is True:
+        return annettava_annos
+
+    else:
+        return 0
 
 
 def main():
-    paino, aika, annos_viimeiset_24h = 0
+    paino = 0
+    aika_edellisesta = 0
+    annos_viimeiset_24h = 0
+    annettava_annos = 0
 
     paino = int(input("Patient's weight (kg): "))
-    aika = int(input("How much time has passed from the previous dose "
-                     "(full hours): "))
+    aika_edellisesta = int(input("How much time has passed from the previous "
+                                 "dose (full hours): "))
     annos_viimeiset_24h = int(input("The total dose for the last "
                                     "24 hours (mg): "))
+    annettava_annos = \
+        calculate_dose(paino, aika_edellisesta, annos_viimeiset_24h)
+
+    print("The amount of Parasetamol to give to the patient:", annettava_annos)
 
 
 if __name__ == "__main__":
