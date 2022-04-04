@@ -7,9 +7,9 @@ Print a box with input error checking
 def read_input(lause):
     """Funktio lukee käyttäjältä syötettä, palauttaa mainille arvoja"""
 
-    onko_arvo_kelvollinen = False
+     = False
 
-    while not onko_arvo_kelvollinen:
+    while not :
 
         str_arvo = input(lause) # Ottaa arvon stringinä vastaan
         arvo = int(str_arvo) # Converttaa arvon intiksi
@@ -17,7 +17,7 @@ def read_input(lause):
         if arvo <= 0:
             continue
         else:
-            onko_arvo_kelvollinen = True
+             = True
 
     return arvo
 
