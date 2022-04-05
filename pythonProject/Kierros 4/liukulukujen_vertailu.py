@@ -16,7 +16,9 @@ EPSILON = 0.000000001
 def compare_floats(a, b, epsilon = 0.000000001):
     """Tämä funktio vertaa, onko arvojen välinen erotus
     epsilonin verran (hyvin hyvin pieni) vaiko ei."""
-    return abs(a) - abs(b) < epsilon
+    result = a - b
+    absolute_value = abs(result)
+    return absolute_value < epsilon
 
 
 def main():

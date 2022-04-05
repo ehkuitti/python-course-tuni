@@ -34,18 +34,6 @@ def calculate_dose(str_paino, str_aika, str_annos_viimeiset_24h):
     if annos_viimeiset_24h == 4000:
         voidaanko_laaketta_antaa = False
 
-    if 6 < aika < 12:
-        kuluneet_annoskerrat = 1
-
-    if 12 < aika < 18:
-        kuluneet_annoskerrat = 2
-
-    if 18 < aika < 24:
-        kuluneet_annoskerrat = 3
-
-    if 24 < aika < 30:
-        kuluneet_annoskerrat = 4
-
     # print("Kuluneet annoskerrat: ", kuluneet_annoskerrat)
     # print("Maksimi kerta-annos: ", maksimi_kerta_annos)
 
@@ -60,11 +48,11 @@ def calculate_dose(str_paino, str_aika, str_annos_viimeiset_24h):
     jaljella_annettavaa = maksimi_vuorokausiannos - annos_viimeiset_24h
 
     # print("Jäljellä annettavaa: ", jaljella_annettavaa)
-    if jaljella_annettavaa >= maksimi_kerta_annos or (jaljella_annettavaa + maksimi_kerta_annos) > 4000:
+    if jaljella_annettavaa >= maksimi_kerta_annos:
         annettava_annos = maksimi_kerta_annos
 
     elif jaljella_annettavaa <= maksimi_kerta_annos:
-        annettava_annos <= maksimi_vourokausiannos - annos_viimeiset_24h
+        annettava_annos = jaljella_annettavaa
 
     if voidaanko_laaketta_antaa is True:
         return annettava_annos
