@@ -35,15 +35,15 @@ def count_values_for_a_rectangle():
 
     while not is_value_valid:
 
-        side_1 = float(input("Enter the lenght of the rectangle's side: 1 "))
+        side_1 = float(input("Enter the length of the rectangle's side 1: "))
         unsigned = is_value_unsigned(side_1)
         if not unsigned:
             continue
 
         else:
             while not is_inner_value_valid:
-                side_2 = float(input("Enter the lenght of the rectangle's side: 2 "))
-                unsigned = is_value_unsigned(side_1)
+                side_2 = float(input("Enter the length of the rectangle's side 2: "))
+                unsigned = is_value_unsigned(side_2)
                 if not unsigned:
                     continue
                 else:
@@ -52,13 +52,18 @@ def count_values_for_a_rectangle():
             is_value_valid = True
 
     circumference = (2 * side_1) + (2 * side_2)
-    print("The circumference is", circumference)
-
+    print(f"The circumference is {circumference:.2f}")
     surface_area = side_1 * side_2
 
-    print("The area is", surface_area)
+    print(f"The surface area is {surface_area:.2f}")
 
     return
+
+
+def incorrect_entry():
+    """Funktio tulostaa virheilmoituksen
+    väärästä syötteestä."""
+    print("Incorrect entry, try again!")
 
 
 def count_values_for_a_square():
@@ -72,7 +77,7 @@ def count_values_for_a_square():
 
     while not is_value_valid:
 
-        side_1 = float(input("Enter the lenght of the square's side: "))
+        side_1 = float(input("Enter the length of the square's side: "))
         unsigned = is_value_unsigned(side_1)
         if not unsigned:
             continue
@@ -81,6 +86,38 @@ def count_values_for_a_square():
             print(f"The circumference is {circumference:.2f}")
 
             surface_area = pow(side_1, 2)
+            print(f"The surface area is {surface_area:.2f}")
+            is_value_valid = True
+
+    return
+
+
+def quit_program():
+    """Funktio sammuttaa ohjelman kokonaan palauttamalla nollan
+    eli arvon >>sammutus onnistui>>"""
+    return 0
+
+
+def count_values_for_a_circle():
+    """Laskee arvoja neliölle, ei ota vastaan parametreja."""
+
+    circumference = 0.0
+    is_value_valid = False
+    side_1 = 0.0
+    surface_area = 0.0
+    unsigned = False
+
+    while not is_value_valid:
+
+        side_1 = float(input("Enter the circle's radius: "))
+        unsigned = is_value_unsigned(side_1)
+        if not unsigned:
+            continue
+        else:
+            circumference = 2 * pi * side_1
+            print(f"The circumference is {circumference:.2f}")
+
+            surface_area = pi * (pow(side_1, 2))
             print(f"The surface area is {surface_area:.2f}")
             is_value_valid = True
 
@@ -98,15 +135,17 @@ def menu():
             count_values_for_a_square()
 
         elif answer == "r":
-            # Replace this comment and "pass" with your function calls dealing
-            # with rectangle.
-            pass
+            count_values_for_a_rectangle()
+
+        elif answer == "c":
+            count_values_for_a_circle()
 
         elif answer == "q":
+            quit_program()
             return
 
         else:
-            print("Incorrect entry, try again!")
+            incorrect_entry()
 
         # Empty row for the sake of readability.
         print()
