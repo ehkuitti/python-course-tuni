@@ -12,7 +12,10 @@ from math import pow
 
 
 def is_value_unsigned(float_value):
-    return float_value <= 0
+    if float_value <= 0:
+        return False
+    else:
+        return True
 
 
 def count_values_for_a_rectangle():
@@ -26,13 +29,13 @@ def count_values_for_a_square():
     is_value_valid = False
     side_1 = 0.0
     surface_area = 0.0
-    bool_value_storage = False
+    unsigned = False
 
     while not is_value_valid:
 
         side_1 = float(input("Enter the lenght of the square's side: "))
-        bool_value_storage = is_value_unsigned
-        if not bool_value_storage:
+        unsigned = is_value_unsigned(side_1)
+        if not unsigned:
             continue
         else:
             circumference = 4 * side_1
