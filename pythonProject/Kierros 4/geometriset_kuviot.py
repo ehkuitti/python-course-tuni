@@ -12,6 +12,8 @@ from math import pow
 
 
 def is_value_unsigned(float_value):
+    """Funktio tarkistaa, onko parametrinä
+    annettu liukuluku positiivinen (unsigned)"""
     if float_value <= 0:
         return False
     else:
@@ -19,7 +21,44 @@ def is_value_unsigned(float_value):
 
 
 def count_values_for_a_rectangle():
-    pass
+    """Funktio tulostaa pinta-alan ja piirin suorakaiteelle."""
+    side_1 = 0.0
+    side_2 = 0.0
+
+    circumference = 0.0
+    is_inner_value_valid = False
+    is_value_valid = False
+    side_1 = 0.0
+    side_2 = 0.0
+    surface_area = 0.0
+    unsigned = False
+
+    while not is_value_valid:
+
+        side_1 = float(input("Enter the lenght of the rectangle's side: 1 "))
+        unsigned = is_value_unsigned(side_1)
+        if not unsigned:
+            continue
+
+        else:
+            while not is_inner_value_valid:
+                side_2 = float(input("Enter the lenght of the rectangle's side: 2 "))
+                unsigned = is_value_unsigned(side_1)
+                if not unsigned:
+                    continue
+                else:
+                    is_inner_value_valid = True
+
+            is_value_valid = True
+
+    circumference = (2 * side_1) + (2 * side_2)
+    print("The circumference is", circumference)
+
+    surface_area = side_1 * side_2
+
+    print("The area is", surface_area)
+
+    return
 
 
 def count_values_for_a_square():
