@@ -8,19 +8,20 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 """
 
 
-def print_box(inner_mark = " ", border_mark = "#", height = 1, width = 2):
-
+def print_box(width=1, height=1, border_mark="#", inner_mark=' '):
     i = 1
     j = 1
     k = 1
 
-    for i in range(1, height):
-        for j in range(1, width):
-            print(border_mark)
-            while 1 < k < width - 1:
-                print(inner_mark)
-            k = 1
-        i += 1
+    for i in range(1, height + 1):
+        for j in range(1, width + 1):
+            print(border_mark, sep="", end="")
+            while 1 < k < width:
+                print(inner_mark, sep="", end="")
+                k += 1
+        print("")
+
+    print("")
 
 
 def main():
