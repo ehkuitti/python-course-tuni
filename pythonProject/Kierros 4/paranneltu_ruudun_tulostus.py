@@ -12,27 +12,25 @@ def print_box(width=1, height=1, border_mark="#", inner_mark=' '):
     i = 1
     i_sisainen = 1
     j = 1
-    k = 1
+    j_sisainen = 1
 
     for i in range(1, height + 1):
 
-        while i_sisainen == 1 or i_sisainen == width - 1:
-            print(border_mark, sep="", end="")
-            i_sisainen += 1
+        if i == 1 or i == height:
+            for i_sisainen in range(1, width+1):
+                print(border_mark, sep="", end="")
 
-        for j in range(1, width + 1):
-            print(border_mark, sep="", end="")
-            k = 1
+            print("")
 
-            while k < (width - 1):
-                print(inner_mark, sep="", end="")
-                k += 1
-            print(border_mark, sep="")
-
-        print("")
-
-    print("")
-
+        if j == 1 or j == height-1:
+            for j_sisainen in range(1, width):
+                print(border_mark, sep="", end="")
+                if j_sisainen == 2 or j_sisainen == (width - 1):
+                    print(inner_mark, sep="", end="")
+                else:
+                    print(border_mark, sep="", end="")
+            print("")
+            
 
 def main():
     print_box(5, 4)
