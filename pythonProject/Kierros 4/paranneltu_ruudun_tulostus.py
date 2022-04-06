@@ -10,15 +10,25 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 def print_box(width=1, height=1, border_mark="#", inner_mark=' '):
     i = 1
+    i_sisainen = 1
     j = 1
     k = 1
 
     for i in range(1, height + 1):
+
+        while i_sisainen == 1 or i_sisainen == width - 1:
+            print(border_mark, sep="", end="")
+            i_sisainen += 1
+
         for j in range(1, width + 1):
             print(border_mark, sep="", end="")
-            while 1 < k < width:
+            k = 1
+
+            while k < (width - 1):
                 print(inner_mark, sep="", end="")
                 k += 1
+            print(border_mark, sep="")
+
         print("")
 
     print("")
