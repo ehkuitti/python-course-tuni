@@ -7,7 +7,9 @@ Email:  eetu.kuittinen@tuni.fi
 Tulostaa neliön oletusarvoilla tai annetuilla parametreilla.
 """
 
+
 # TODO: the definition of print_box goes here unless it goes after main.
+
 
 def print_box(width=1, height=1, border_mark="#", inner_mark=' '):
     """ Jos parametrejä ei anneta, tulostaa ruudun em. oletusarvoilla."""
@@ -33,7 +35,7 @@ def print_box(width=1, height=1, border_mark="#", inner_mark=' '):
 
         # Poikkeusrivit
         else:
-            for sijainti_poikkeusrivilla in range(1, width+1):
+            for sijainti_poikkeusrivilla in range(1, width + 1):
 
                 # Alussa ja lopussa tulostetaan border_mark
                 if sijainti_poikkeusrivilla == 1:
@@ -56,6 +58,7 @@ def main():
     print_box(3, 8, "*")
     print_box(5, 4, "O", "o")
     print_box(inner_mark=".", border_mark="O", height=4, width=6)
+
 
 # TODO: the definition of print_box could also go here, it is up to you.
 
