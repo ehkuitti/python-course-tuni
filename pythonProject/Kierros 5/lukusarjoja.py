@@ -9,14 +9,13 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 
 def main():
-
     i = 0
     j = 0
 
-    for i in range (0, 101, 2):
+    for i in range(0, 101, 2):
         print(i)
 
-    for j in range (100, -1, -2):
+    for j in range(100, -1, -2):
         print(j)
 
 
