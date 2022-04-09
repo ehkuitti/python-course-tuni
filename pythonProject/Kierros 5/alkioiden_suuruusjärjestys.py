@@ -22,18 +22,8 @@ def is_the_list_in_order(lista=[]):
         return are_items_in_ascending_order
 
     else:
-        one_greater_than_index = lista[1]
-        lenght_of_the_list = len(lista)
-
-        for item in range (0, lenght_of_the_list, 1):
-            if one_greater_than_index > lenght_of_the_list:
-                break
-            elif lista[item] < lista[one_greater_than_index] \
-                    and item == lenght_of_the_list-1:
-                one_greater_than_index += 1
-                are_items_in_ascending_order = True
-            else:
-                pass
+        if lista == sorted(lista):
+            are_items_in_ascending_order = True
 
     return are_items_in_ascending_order
 
