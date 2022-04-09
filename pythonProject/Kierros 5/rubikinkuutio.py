@@ -13,9 +13,11 @@ def main():
     arvo = 0.00
     i = 1
     lista = []
-    indeksi_arvolla_0 = 0
-    indeksi_arvolla_miinus1 = 0
     keskiarvo = 0
+    minimiarvo = 0
+    maksimiarvo = 0
+    minimimaara = 0
+    maksimimaara = 0
 
     while i < 6:
         print("Enter the time for performance ", i, ": ", sep="", end="")
@@ -23,22 +25,23 @@ def main():
         lista.append(arvo)
         i += 1
 
-    # Poistaa duplikaattiarvot listalta
-    lista = list(set(lista))
-
     # Järjestää arvot nousevaan järjestykseen
     lista.sort()
 
-    # print("Lista ennen alkioiden poistoa: ", lista)
+    # Minimiarvo ja maksimiarvo talteen omiin muuttujiinsa
+    # minimiarvo = min(lista)
+    # maksimiarvo = max(lista)
 
-    # Määritellään muuttujat arvoiltaan nimiään vastaaviksi
+    # minimimaara = lista.count(minimiarvo)
+    # maksimimaara = lista.count(maksimiarvo)
+
     del lista[0]
     del lista[-1]
 
-    # print("Lista alkioiden poiston jäljeen: ", lista)
+    # print("Summa: ", sum(lista))
+    # print("Pituus: ", len(lista))
 
-    # Lasketaan keskiarvo listan alkioille
-    keskiarvo = sum(lista) / len(lista)
+    keskiarvo = sum(lista) / 3
 
     print(f"The official competition score is {keskiarvo:.2f} seconds.")
 
