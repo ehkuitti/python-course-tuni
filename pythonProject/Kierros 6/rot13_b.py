@@ -10,35 +10,37 @@ on tyhjä merkkijono.
 
 
 def read_message():
-
+    """Tämä funktio lukee käyttäjän syötettä ja lisää sitä taulukon jatkeeksi.
+    Funktiosta palaudutaan tyhjällä merkkijonolla tai välilyönnillä."""
     inputti = ""
     msg = []
-    is_input_valid = True
 
-    while is_input_valid:
+    while True:
         inputti = input()
         if inputti == "" or inputti == " ":
-            is_input_valid = False
-        msg += inputti
-
-    return msg
+            return msg
+        msg.append(inputti)
+    # return msg
 
 
 def main():
-
-    msg_shouting = ""
-    msg_lenght = 0
-
     print("Enter text rows to the message. Quit by entering an empty row.")
     msg = read_message()
 
+    i = 0
+    msg_text = ""
+    msg_shouting = ""
+    msg_lenght = 0
+
     msg_lenght = len(msg)
 
-    for i in range (0, msg_lenght, 1):
-        msg_shouting += msg.upper([i])
-
     print("The same, shouting:")
-    print(msg_shouting)
+
+    while i < msg_lenght:
+        msg_text = msg[i]
+        msg_shouting = msg_text.upper()
+        print(msg_shouting)
+        i += 1
 
 
 if __name__ == "__main__":
