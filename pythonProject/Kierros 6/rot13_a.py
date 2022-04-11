@@ -23,15 +23,31 @@ def encrypt(text):
                        "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i",
                        "j", "k", "l", "m"]
 
+    char_index = 0
+    encr_char = ''
+    len_encr = 0
+
+    len_encr = len(encrypted_chars)
+
     if text in regular_chars:
-        print
+        char_index = regular_chars.index(text)
+        print("Char index: ", char_index)
 
+    # Jos taulukon koko ei ole suurempi kuin merkin indeksi
+    if char_index <= len_encr:
+        encr_char = encrypted_chars[char_index]
 
-    return ...the result of encryption...
+    print("Salattu merkki: ", encr_char)
+
+    # return ...the result of encryption...
 
 
 def main():
-    pass
+
+    text = ""
+    text = input("Input text: ")
+
+    encrypt(text)
 
 
 if __name__ == "__main__":
