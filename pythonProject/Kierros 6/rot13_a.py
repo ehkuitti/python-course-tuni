@@ -26,18 +26,32 @@ def encrypt(text):
     char_index = 0
     encr_char = ''
     len_encr = 0
+    lowercase_text = ""
+    was_text_uppercase = False
 
     len_encr = len(encrypted_chars)
 
+    if text.isupper():
+        lowercase_text = text.lower()
+        text = lowercase_text
+        was_text_uppercase = True
+
     if text in regular_chars:
         char_index = regular_chars.index(text)
-        print("Char index: ", char_index)
+        # print("Char index: ", char_index)
+
+    else:
+        return text
 
     # Jos taulukon koko ei ole suurempi kuin merkin indeksi
     if char_index <= len_encr:
         encr_char = encrypted_chars[char_index]
 
-    print("Salattu merkki: ", encr_char)
+    if was_text_uppercase:
+        encr_char = encr_char.upper()
+
+    # print("Salattu merkki: ", encr_char)
+    return encr_char
 
     # return ...the result of encryption...
 
@@ -46,8 +60,10 @@ def main():
 
     text = ""
     text = input("Input text: ")
+    paluuarvo = 0
 
-    encrypt(text)
+    paluuarvo = encrypt(text)
+    print(paluuarvo)
 
 
 if __name__ == "__main__":
