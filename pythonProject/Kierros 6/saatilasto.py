@@ -8,18 +8,28 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 """
 
 
-def onko_arvo_kelvollinen(arvo):
-
+def onko_arvo_negatiivinen_tai_nolla(arvo):
+    """Funktio tutkii, onko käyttäjän syöttämä arvo negatiivinen tai nolla.
+    Mikäli on, palauttaa arvon True, muuten arvon False."""
     return arvo <= 0
 
 
 def kay_paivat_lapi(paivien_maara):
+    """Funktio ottaa parametrinä vastaan käyttäjän mainissa syöttämän arvon."""
 
-    buuleani = False
-    buuleani = onko_arvo_kelvollinen(arvo)
-    print("Buuleani: ", buuleani)
-
+    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
+    nykyinen_paiva = 0
     paivat = []
+
+    # Jos käyttäjä syöttää 0 tai vähemmän päiviä, ohjelman suoritus keskeytyy
+    if onko_arvo_negatiivinen_tai_nolla(paivien_maara):
+        return
+
+    for i in range(0, paivien_maara, 1):
+        nykyinen_paiva = int(input("Enter day ", i,
+                                   ". temperature in Celsius: ", sep=""))
+
+
 
 
 def main():
@@ -28,6 +38,7 @@ def main():
 
     paivien_maara = int(input("Enter amount of days: "))
     kay_paivat_lapi(paivien_maara)
+
 
 if __name__ == "__main__":
     main()
