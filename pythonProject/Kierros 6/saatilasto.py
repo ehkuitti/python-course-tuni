@@ -166,7 +166,7 @@ def kay_paivat_lapi(paivien_maara):
         return 0, 0
 
     for paiva in range(1, paivien_maara + 1, 1):
-        print("Enter day ", paiva, ". temperature in Celsius: ",
+        print("Enter day ", paiva, ". temperature in Celcius: ",
               sep="", end="")
         nykyinen_paiva = float(input())
         paivalista.append(nykyinen_paiva)
