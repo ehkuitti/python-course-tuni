@@ -8,40 +8,63 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 """
 
 
+def laske_mediaanin_alittavat_arvot(paivat, paivien_maara, mediaani):
+
+    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
+
+    pass
+
+
+def laske_mediaanin_ylittavat_ja_yhtasuuret_arvot(paivat,
+                                                  paivien_maara,
+                                                  mediaani):
+
+    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
+    yli_tai_yhtasuuri = 0
+    ero_keskiarvo = 0
+
+    for paiva in range(0, paivien_maara, 1):
+        if paivat[paivat] >= mediaani:
+            yli_tai_yhtasuuri += 1
+            print("Day ", paiva, ".  ", paivat[paivat], "C difference to"
+                  "mean:   ",  sep="")
+
+
 def onko_arvo_pariton(arvo):
     return arvo % 2 > 0
 
 
 def laske_mediaani(paivat, paivien_maara):
+
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
+    paivat_pienimmasta_suurimpaan = sorted(paivat)
     keskimmaisten_keskiarvo = 0
     mediaani = 0
     parillinen_keskimmainen_arvo_1 = 0
     parillinen_keskimmainen_arvo_2 = 0
     pariton_keskimmainen_arvo = 0
 
-    # Taulukko järjestetään pienimmästä suurimpaan mediaanin selvittämiseksi
-    paivat.sort()
-
     # Pariton määrä arvoja
     if onko_arvo_pariton(paivien_maara):
 
         # Keskimmainen sijaitsee taulukon puolivälissä
         pariton_keskimmainen_arvo = (paivien_maara // 2)
-        mediaani = paivat[pariton_keskimmainen_arvo]
+        mediaani = paivat_pienimmasta_suurimpaan[pariton_keskimmainen_arvo]
 
     # Parillinen määrä arvoja
     else:
 
         # Otetaan muuttujiin talteen kaksi keskimmäistä arvoa sekä niiden
         # keskiarvo
-        pariton_keskimmainen_arvo_1 = (paivien_maara // 2) - 1
-        pariton_keskimmainen_arvo_2 = (paivien_maara // 2)
-        keskimmaisten_keskiarvo = (paivat[pariton_keskimmainen_arvo_1] +
-                                   paivat[pariton_keskimmainen_arvo_2]) / 2
+        parillinen_keskimmainen_arvo_1 = (paivien_maara // 2) - 1
+        parillinen_keskimmainen_arvo_2 = (paivien_maara // 2)
+        keskimmaisten_keskiarvo = (paivat_pienimmasta_suurimpaan
+                                   [parillinen_keskimmainen_arvo_1] +
+                                   paivat_pienimmasta_suurimpaan
+                                   [parillinen_keskimmainen_arvo_2]) / 2
         mediaani = keskimmaisten_keskiarvo
 
-    print(f"Temperature median: {mediaani:.1f}C")
+    return mediaani
 
 
 def laske_keskiarvo(paivat, paivien_maara):
@@ -54,7 +77,7 @@ def laske_keskiarvo(paivat, paivien_maara):
         alkiot_yhteensa += paivat[indeksi]
 
     keskiarvo = alkiot_yhteensa / paivien_maara
-    print(f"Temperature mean: {keskiarvo:.1f}C")
+    return keskiarvo
 
 
 def onko_arvo_negatiivinen_tai_nolla(arvo):
@@ -68,7 +91,7 @@ def kay_paivat_lapi(paivien_maara):
 
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
     nykyinen_paiva = 0
-    paivat = []
+    paivalista = []
     tyhja_taulukko = []
 
     # Jos käyttäjä syöttää 0 tai vähemmän päiviä, ohjelman suoritus keskeytyy
@@ -80,12 +103,12 @@ def kay_paivat_lapi(paivien_maara):
         print("Enter day ", paiva, ". temperature in Celsius: ",
               sep="", end="")
         nykyinen_paiva = float(input())
-        paivat.append(nykyinen_paiva)
+        paivalista.append(nykyinen_paiva)
 
-    return paivat, paivien_maara
+    return paivalista, paivien_maara
 
     # print("Päästiin tänne for-loopin jälkeen")
-    # print("Listan arvot", paivat)
+    # print("Listan arvot", paivalista)
 
 
 def main():
@@ -94,7 +117,9 @@ def main():
     kutsua """
 
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
-    paivat = []
+    keskiarvo = 0
+    mediaani = 0
+    paivalista = []
     paivien_maara = 0
     tiedot_paivista = []
 
@@ -109,11 +134,18 @@ def main():
 
     # Mainin muuttujat päivitetään ajan tasalle käy_päivät_läpi funktion pa-
     # lauttamien arvojen perusteella
-    paivat = tiedot_paivista[0]
+    paivalista = tiedot_paivista[0]
     paivien_maara = tiedot_paivista[1]
 
-    laske_keskiarvo(paivat, paivien_maara)
-    laske_mediaani(paivat, paivien_maara)
+    keskiarvo = laske_keskiarvo(paivalista, paivien_maara)
+    print("")
+    print(f"Temperature mean: {keskiarvo:.1f}C")
+    mediaani = laske_mediaani(paivalista, paivien_maara)
+    print(f"Temperature median: {mediaani:.1f}C")
+    # laske_mediaanin_ylittavat_ja_yhtasuuret_arvot(paivalista,
+    #                                               paivien_maara,
+    #                                               mediaani)
+    # laske_mediaanin_alittavat_arvot(paivalista, paivien_maara, mediaani)
 
 
 if __name__ == "__main__":
