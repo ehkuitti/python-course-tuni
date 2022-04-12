@@ -8,22 +8,31 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 """
 
 
-def longest_substring_in_order(string):
+def longest_substring_in_order(merkkijono):
+    """Käy muuttujat läpi aakkosjärjestyksessä, palauttaa substringin."""
+    # Muuttujat aakkojärjestyksessä
+    alimerkkijono = ""
+    merkkijonon_pituus = len(merkkijono)
+    englannin_aakkoset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+                          "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+                          "u", "v", "w", "x", "y", "z"]
+    englannin_aakkosten_indeksi = 0
+    englannin_aakkosten_pituus = len(englannin_aakkoset)
 
-    substr = ""
-    lenght_of_string = 0
+    if merkkijonon_pituus == 0 or merkkijonon_pituus == 1:
+        return merkkijono
 
-    lenght_of_string = len(string)
+    for i in range(0, merkkijonon_pituus, 1):
+        if i > englannin_aakkosten_pituus:
+            englannin_aakkosten_indeksi = 0
+        elif merkkijono[i] >= englannin_aakkoset[englannin_aakkosten_indeksi]:
+            alimerkkijono += merkkijono[i]
+            englannin_aakkosten_indeksi += 1
 
-    if lenght_of_string == 0 or lenght_of_string == 1:
-        return string
-
-    else:
-        pass
+    return alimerkkijono
 
 
 def main():
-
     string = ""
     string = input("Input a string: ")
 
