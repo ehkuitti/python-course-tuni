@@ -30,7 +30,6 @@ def laske_mediaanin_alittavat_arvot(paivalista,
     pienempi_kuin_mediaani = 0
     ero_keskiarvoon = 0
 
-    print("")
     print("Under median were: ")
     for paiva in range(0, paivien_maara, 1):
         if paivalista[paiva] < mediaani:
@@ -58,7 +57,7 @@ def laske_mediaanin_ylittavat_ja_yhtasuuret_arvot(paivalista,
 
     # print("Keskiarvo: ", keskiarvo)
 
-    print("")
+    print("Over or at median were: ")
     for paiva in range(0, paivien_maara, 1):
         if paivalista[paiva] >= mediaani:
             yli_tai_yhtasuuri_kuin_mediaani += 1
