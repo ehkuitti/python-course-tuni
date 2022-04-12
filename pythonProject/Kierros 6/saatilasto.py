@@ -25,11 +25,13 @@ def kay_paivat_lapi(paivien_maara):
     if onko_arvo_negatiivinen_tai_nolla(paivien_maara):
         return
 
-    for i in range(0, paivien_maara, 1):
-        nykyinen_paiva = int(input("Enter day ", i,
-                                   ". temperature in Celsius: ", sep=""))
+    for i in range(1, paivien_maara+1, 1):
+        print("Enter day ", i, ". temperature in Celsius: ", sep="", end="")
+        nykyinen_paiva = int(input())
+        paivat.append(nykyinen_paiva)
 
-
+    # print("Päästiin tänne for-loopin jälkeen")
+    # print("Listan arvot", paivat)
 
 
 def main():
