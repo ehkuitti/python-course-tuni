@@ -8,15 +8,26 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 """
 
 
-def longest_substring_in_order():
-    pass
+def longest_substring_in_order(string):
+
+    substr = ""
+    lenght_of_string = 0
+
+    lenght_of_string = len(string)
+
+    if lenght_of_string == 0 or lenght_of_string == 1:
+        return string
+
+    else:
+        pass
 
 
 def main():
 
-    merkkijono = ""
+    string = ""
+    string = input("Input a string: ")
 
-    pass
+    longest_substring_in_order(string)
 
 
 if __name__ == "__main__":
