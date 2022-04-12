@@ -35,9 +35,9 @@ def laske_mediaanin_alittavat_arvot(paivalista,
         if paivalista[paiva] < mediaani:
             pienempi_kuin_mediaani += 1
             ero_keskiarvoon = mediaani - keskiarvo
-            print("Day  ", paiva + 1, ".  ", paivalista[paiva],
-                  "C difference to mean:  ",
-                  paivalista[paiva], "C", sep="")
+            print(f"Day  {paiva+1:.0f}.   {paivalista[paiva]} "
+                  f"C difference to mean:  {ero_keskiarvoon:.1f}C",
+                  sep="")
 
 
 def laske_mediaanin_ylittavat_ja_yhtasuuret_arvot(paivalista,
@@ -61,11 +61,9 @@ def laske_mediaanin_ylittavat_ja_yhtasuuret_arvot(paivalista,
     for paiva in range(0, paivien_maara, 1):
         if paivalista[paiva] >= mediaani:
             yli_tai_yhtasuuri_kuin_mediaani += 1
-            ero_keskiarvoon = mediaani - keskiarvo
-            print("Day  ", paiva + 1, ".  ", paivalista[paiva],
-                  "C difference to "
-                  "mean:   ",
-                  paivalista[paiva], "C", sep="")
+            ero_keskiarvoon = mediaani + keskiarvo
+            print(f"Day {paiva+1:.1f}. {paivalista[paiva]} \
+                  C difference to mean:  {ero_keskiarvoon:.1f}C", sep="")
 
 
 def onko_arvo_pariton(arvo):
