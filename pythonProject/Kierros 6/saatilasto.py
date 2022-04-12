@@ -56,7 +56,7 @@ def laske_mediaanin_ylittavat_ja_yhtasuuret_arvot(paivalista,
     yli_tai_yhtasuuri_kuin_mediaani = 0
     ero_keskiarvoon = 0
 
-    print("Keskiarvo: ", keskiarvo)
+    # print("Keskiarvo: ", keskiarvo)
 
     print("")
     for paiva in range(0, paivien_maara, 1):
