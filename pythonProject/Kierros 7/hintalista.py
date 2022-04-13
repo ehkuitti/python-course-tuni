@@ -19,10 +19,22 @@ PRICES = {
 def main():
 
     syote = ""
-    syote = input("Enter product name: ")
+    stripattu_syote = ""
 
-    if syote == "" or syote == " " or syote == "  ":
-        print("Bye!")
+    while True:
+        syote = input("Enter product name: ")
+
+        if syote == "" or syote == " " or syote == "  ":
+            print("Bye!")
+            break
+
+        elif syote not in PRICES:
+            stripattu_syote = syote.strip()
+            print("Error:", stripattu_syote, "is unknown.")
+
+        else:
+            print("The price of ", syote, " is ", sep="", end="")
+            print(PRICES[syote], "e")
 
 
 if __name__ == "__main__":
