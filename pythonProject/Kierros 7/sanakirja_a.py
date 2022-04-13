@@ -9,16 +9,15 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 
 def main():
-
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
 
     english_spanish = {"hey": "hola", "thanks": "gracias", "home": "casa"}
     input_word = ""
-    sorted_english_spanish = {}
+    split_text_to_spanish = ""
+    text_to_spanish = ""
     word_in_english = ""
     word_in_spanish = ""
     word_to_be_removed = ""
-
 
     while True:
         command = input("[W]ord/[A]dd/[R]emove/[P]rint/[T]ranslate/[Q]uit: ")
@@ -58,6 +57,35 @@ def main():
             for avain in sorted(english_spanish):
                 print(avain, english_spanish[avain])
 
+        elif command == "T":
+
+            text_to_spanish = input("Enter the text to be translated into "
+                                    "Spanish: ")
+            split_text_to_spanish = text_to_spanish.split()
+            split_lenght = len(split_text_to_spanish)
+            # print("\nSplitatun input-taulukon pituus: ", split_lenght)
+            # print("Splitatun input-taulukon sisältö: ", split_text_to_spanish)
+            #
+            # print("Sanakirjan sisältö: ", english_spanish)
+            print("The text, translated by the dictionary: ")
+            i = 0
+            is_input_traversion_over = False
+            while not is_input_traversion_over:
+                for avain in sorted(english_spanish):
+                    if i > split_lenght-1:
+                        break
+                    elif split_text_to_spanish[i] in english_spanish:
+                        print(english_spanish.get(split_text_to_spanish[i]), " ", sep="", end="")
+                    else:
+                        print(split_text_to_spanish[i], " ", sep="", end="")
+                    i += 1
+                if i < len(split_text_to_spanish):
+                    continue
+                else:
+                    is_input_traversion_over = True
+                    # print(avain, english_spanish[avain])
+                    # -> tulostaa ekalta "riviltä" >> home casa
+            print("")
         elif command == "Q":
             print("Adios!")
             return
@@ -68,3 +96,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# while not is_list_traversion_over:
+            #     for i in range(0, list_lenght, 1):
+            #         if sorted_english_spanish[i] == text_to_spanish:
+            #             print(text_to_spanish, end="")
+            #         else:
+            #             print(text_to_spanish)
+            #     is_list_traversion_over = True
