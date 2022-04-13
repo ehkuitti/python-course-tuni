@@ -14,34 +14,49 @@ def main():
 
     english_spanish = {"hey": "hola", "thanks": "gracias", "home": "casa"}
     input_word = ""
+    sorted_english_spanish = {}
     word_in_english = ""
     word_in_spanish = ""
+    word_to_be_removed = ""
+
 
     while True:
         command = input("[W]ord/[A]dd/[R]emove/[P]rint/[T]ranslate/[Q]uit: ")
 
         if command == "W":
 
-            input_word = input("Enter the input_word to be translated: ")
+            input_word = input("Enter the word to be translated: ")
 
             if input_word in english_spanish:
                 print(input_word, "in Spanish is", english_spanish[input_word])
 
             else:
-                print("The input_word", input_word,
+                print("The word", input_word,
                       "could not be found from the dictionary.")
 
         elif command == "A":
             word_in_english = \
-                input("Give the input_word to be added in English: ")
+                input("Give the word to be added in English: ")
             word_in_spanish = \
-                input("Give the input_word to be added in Spanish: ")
+                input("Give the word to be added in Spanish: ")
 
             if word_in_spanish not in english_spanish:
                 english_spanish[word_in_english] = word_in_spanish
 
         elif command == "R":
-            input("Give the input_word to be removed: ")
+            word_to_be_removed = input("Give the word to be removed: ")
+
+            if word_to_be_removed in english_spanish:
+                del english_spanish[word_to_be_removed]
+            else:
+                print("The word hey could not be found from the dictionary.")
+
+        elif command == "P":
+
+            # TÄRKEÄÄÄÄÄÄ!!!!!!!!! Tulostaa aakkosjärjestyksessä arvot avaimen
+            # mukaan
+            for avain in sorted(english_spanish):
+                print(avain, english_spanish[avain])
 
         elif command == "Q":
             print("Adios!")
