@@ -23,18 +23,18 @@ def main():
 
     while True:
         syote = input("Enter product name: ")
+        stripattu_syote = syote.strip()
 
-        if syote == "" or syote == " " or syote == "  ":
+        if stripattu_syote == "":
             print("Bye!")
             break
 
-        elif syote not in PRICES:
-            stripattu_syote = syote.strip()
-            print("Error:", stripattu_syote, "is unknown.")
+        elif stripattu_syote in PRICES:
+            print("The price of ", stripattu_syote, " is ", sep="", end="")
+            print(f"{PRICES[stripattu_syote]:.2f} e")
 
         else:
-            print("The price of ", syote, " is ", sep="", end="")
-            print(PRICES[syote], "e")
+            print("Error:", stripattu_syote, "is unknown.")
 
 
 if __name__ == "__main__":
