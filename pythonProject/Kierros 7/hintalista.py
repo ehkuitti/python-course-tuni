@@ -23,8 +23,11 @@ def main():
 
     while True:
         syote = input("Enter product name: ")
+        # Syote tulee stripata, koska Plussa testaa arvoja kuten ' <syöte>  '
         stripattu_syote = syote.strip()
 
+        # Jos syöte on strippaamisen jälkeen tyhjä merkkijono, syötettiin pel-
+        # kästään välilyöntejä
         if stripattu_syote == "":
             print("Bye!")
             break
