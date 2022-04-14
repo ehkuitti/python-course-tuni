@@ -11,8 +11,9 @@ pötiloissa yleensä). Ohjelma laittaa luvut taulukkoon ja tekee niillä em. las
 kuoperaatiot omissa funktioissaan. Kaikki funktiot palauttavat aina arvot mai-
 nille, joka huolehtii ohjelman viemisestä eteenpäin. Main tallentaa aina paluu-
 arvot muuttujiin, jotta niiden arvoja voitaisiin käyttää myös muissa funktiois-
-sa tarpeen niin vaatiessa. Jokainen funktio, joka palauttaa arvon (poislukien
-Pythonin automaattinen None returnin puuttuessa), otetaan talteen mainissa.
+sa tarpeen niin vaatiessa. Jokaisen funktion, joka palauttaa arvon (poislukien
+Pythonin automaattinen None returnin puuttuessa), paluuarvo
+otetaan talteen mainissa.
 """
 
 
@@ -27,17 +28,17 @@ def laske_mediaanin_alittavat_arvot(paivalista,
      loop pyörii niin (listan koko - 1) asti, sillä indeksointi alkaa 0:sta."""
 
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
-    pienempi_kuin_mediaani = 0
     ero_keskiarvoon = 0
+    pienempien_kuin_mediaanin_maara = 0
 
+    print("")
     print("Under median were: ")
     for paiva in range(0, paivien_maara, 1):
         if paivalista[paiva] < mediaani:
-            pienempi_kuin_mediaani += 1
-            ero_keskiarvoon = mediaani - keskiarvo
-            print(f"Day  {paiva+1:.0f}.   {paivalista[paiva]} "
-                  f"C difference to mean:  {ero_keskiarvoon:.1f}C",
-                  sep="")
+            pienempien_kuin_mediaanin_maara += 1
+            ero_keskiarvoon = paivalista[paiva] - keskiarvo
+            print(f"Day{paiva + 1:3}.{paivalista[paiva]:6}"
+                  f"C difference to mean:{ero_keskiarvoon:6.1f}C", sep="")
 
 
 def laske_mediaanin_ylittavat_ja_yhtasuuret_arvot(paivalista,
@@ -52,18 +53,17 @@ def laske_mediaanin_ylittavat_ja_yhtasuuret_arvot(paivalista,
      indeksointi alkaa 0:sta."""
 
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
-    yli_tai_yhtasuuri_kuin_mediaani = 0
     ero_keskiarvoon = 0
+    yli_tai_yhtasuurien_kuin_mediaani_maara = 0
 
-    # print("Keskiarvo: ", keskiarvo)
-
+    print("")
     print("Over or at median were: ")
     for paiva in range(0, paivien_maara, 1):
         if paivalista[paiva] >= mediaani:
-            yli_tai_yhtasuuri_kuin_mediaani += 1
-            ero_keskiarvoon = mediaani + keskiarvo
-            print(f"Day {paiva+1:.1f}. {paivalista[paiva]} \
-                  C difference to mean:  {ero_keskiarvoon:.1f}C", sep="")
+            yli_tai_yhtasuurien_kuin_mediaani_maara += 1
+            ero_keskiarvoon = paivalista[paiva] - keskiarvo
+            print(f"Day{paiva+1:3}.{paivalista[paiva]:6}"
+                  f"C difference to mean:{ero_keskiarvoon:6.1f}C", sep="")
 
 
 def onko_arvo_pariton(arvo):
@@ -91,21 +91,19 @@ def laske_mediaani(paivalista, paivien_maara):
     """
 
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
-    paivat_pienimmasta_suurimpaan = sorted(paivalista)
     keskimmaisten_keskiarvo = 0
     mediaani = 0
+    paivat_pienimmasta_suurimpaan = sorted(paivalista)
     parillinen_keskimmainen_arvo_1 = 0
     parillinen_keskimmainen_arvo_2 = 0
     pariton_keskimmainen_arvo = 0
 
-    # Pariton määrä arvoja
     if onko_arvo_pariton(paivien_maara):
 
         # Keskimmainen sijaitsee taulukon puolivälissä
         pariton_keskimmainen_arvo = (paivien_maara // 2)
         mediaani = paivat_pienimmasta_suurimpaan[pariton_keskimmainen_arvo]
 
-    # Parillinen määrä arvoja
     else:
 
         # Otetaan muuttujiin talteen kaksi keskimmäistä arvoa sekä niiden
@@ -127,8 +125,8 @@ def laske_keskiarvo(paivalista, paivien_maara):
     rällä. Palauttaa keskiarvot mainille. """
 
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
-    lista_alkioiden_summa = 0
     keskiarvo = 0
+    lista_alkioiden_summa = 0
     paivataulukon_pituus = len(paivalista)
 
     for indeksi in range(0, paivataulukon_pituus, 1):
@@ -170,9 +168,6 @@ def kay_paivat_lapi(paivien_maara):
 
     return paivalista, paivien_maara
 
-    # print("Päästiin tänne for-loopin jälkeen")
-    # print("Listan arvot", paivalista)
-
 
 def main():
     """Mainin tehtävänä on huolehtia kaikkien muiden funktioiden kutsumisesta.
@@ -194,7 +189,7 @@ def main():
     # Funktion paluuarvot otetaan talteen taulukkoon
     tiedot_paivista = kay_paivat_lapi(paivien_maara)
 
-    # Jos taulukon 1. ja 2. indeksi ovat nollia, ohjelma suljetaan
+    # jos kay_paivat_läpi palautti kaksi nollaa, ohjelman suoritus päätetään
     if tiedot_paivista[0] == 0 and tiedot_paivista[1] == 0:
         return
 
