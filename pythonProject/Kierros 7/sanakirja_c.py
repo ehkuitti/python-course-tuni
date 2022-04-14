@@ -9,11 +9,12 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 
 def main():
-    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
+    # MUUTTUJIEN ALUSTUKSET (TYYPPIJÄRJESTYKSESSÄ)
 
     english_spanish = {"hey": "hola", "thanks": "gracias", "home": "casa"}
+    spanish_english = english_spanish
+
     input_word = ""
-    spanish_english = {}
     split_text_to_spanish = ""
     text_to_spanish = ""
     word_in_english = ""
@@ -76,17 +77,23 @@ def main():
 
         elif command == "P":
 
-            # TÄRKEÄÄÄÄÄÄ!!!!!!!!! Tulostaa aakkosjärjestyksessä arvot avaimen
-            # mukaan
+            # TÄRKEÄÄÄÄÄÄ! Tulostaa aakkosjärjestyksessä arvot avaimen mukaan
             print("")
             print("English-Spanish")
             for avain in sorted(english_spanish):
                 print(avain, english_spanish[avain])
 
+            spanish_english = english_spanish
+
+            # Kääntää ympäri: arvosta avain ja päinvastoin
+            spanish_english = {v: k for k, v in spanish_english.items()}
+            # print("Spanski englanskij")
+            # print(spanish_english)
+
             print("")
-            print("Spanish English")
-            for avain in sorted(english_spanish):
-                print(english_spanish[avain], avain)
+            print("Spanish-English")
+            for llave in sorted(spanish_english):
+                print(llave, spanish_english[llave])
             print("")
 
         elif command == "T":
@@ -137,3 +144,16 @@ if __name__ == "__main__":
             #         else:
             #             print(text_to_spanish)
             #     is_list_traversion_over = True
+
+# TIEDOT ENGLISH_SPANISHISTA SPANISH_ENGLISHIIN
+
+            # x = english_spanish.keys()
+            # print(x)
+            # exit(0)
+
+            # for key in sorted(english_spanish):
+            #     if english_spanish[key] not in spanish_english:
+            #         spanish_english[key] = english_spanish[key]
+
+            # if english_spanish not in spanish_english:
+            #     pass
