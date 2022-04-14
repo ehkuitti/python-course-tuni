@@ -38,9 +38,11 @@ def longest_substring_in_order(merkkijono):
             alimerkkijono += merkkijono[i]
             alimerkkijonon_pituus += 1
 
-        if alimerkkijonon_pituus > pisin_alimerkkijonon_pituus:
+        elif alimerkkijonon_pituus > pisin_alimerkkijonon_pituus:
             pisin_alimerkkijono = alimerkkijono
             pisin_alimerkkijonon_pituus = alimerkkijonon_pituus
+            alimerkkijono = merkkijono[i]
+            alimerkkijonon_pituus = 1
 
         else:
             alimerkkijono = merkkijono[i]
@@ -52,8 +54,10 @@ def longest_substring_in_order(merkkijono):
 def main():
     string = ""
     string = input("Input a string: ")
+    paluuarvo = ""
 
-    longest_substring_in_order(string)
+    paluuarvo = longest_substring_in_order(string)
+    print(paluuarvo)
 
 
 if __name__ == "__main__":
