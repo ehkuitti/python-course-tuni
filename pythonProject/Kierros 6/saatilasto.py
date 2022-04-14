@@ -127,9 +127,9 @@ def laske_keskiarvo(paivalista, paivien_maara):
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
     keskiarvo = 0
     lista_alkioiden_summa = 0
-    paivataulukon_pituus = len(paivalista)
+    paivalistan_pituus = len(paivalista)
 
-    for indeksi in range(0, paivataulukon_pituus, 1):
+    for indeksi in range(0, paivalistan_pituus, 1):
         lista_alkioiden_summa += paivalista[indeksi]
 
     keskiarvo = lista_alkioiden_summa / paivien_maara
@@ -153,7 +153,7 @@ def kay_paivat_lapi(paivien_maara):
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
     nykyinen_paiva = 0
     paivalista = []
-    tyhja_taulukko = []
+    tyhja_lista = []
 
     # Jos käyttäjä syöttää 0 tai vähemmän päiviä, ohjelman suoritus keskeytyy
     # mainissa.
