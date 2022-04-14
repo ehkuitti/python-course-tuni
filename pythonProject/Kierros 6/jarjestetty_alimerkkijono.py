@@ -10,26 +10,43 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 def longest_substring_in_order(merkkijono):
     """Käy muuttujat läpi aakkosjärjestyksessä, palauttaa substringin."""
-    # Muuttujat aakkojärjestyksessä
+    # Muuttujat aakkosjärjestyksessä
     alimerkkijono = ""
+    alimerkkijonon_pituus = 0
+    indeksi = 0
     merkkijonon_pituus = len(merkkijono)
-    englannin_aakkoset = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
-                          "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
-                          "u", "v", "w", "x", "y", "z"]
-    englannin_aakkosten_indeksi = 0
-    englannin_aakkosten_pituus = len(englannin_aakkoset)
+    pisin_alimerkkijono = ""
+    pisin_alimerkkijonon_pituus = 0
 
     if merkkijonon_pituus == 0 or merkkijonon_pituus == 1:
         return merkkijono
 
     for i in range(0, merkkijonon_pituus, 1):
-        if i > englannin_aakkosten_pituus:
-            englannin_aakkosten_indeksi = 0
-        elif merkkijono[i] >= englannin_aakkoset[englannin_aakkosten_indeksi]:
-            alimerkkijono += merkkijono[i]
-            englannin_aakkosten_indeksi += 1
 
-    return alimerkkijono
+        # TÄMÄ TEHDÄÄN VAIN EKALLA KIERROKSELLA, MUTTA SILLOIN AINA
+        if i == 0:
+            alimerkkijono += merkkijono[0]
+            alimerkkijonon_pituus = 1
+
+        # JOS KIRJAIN ON SAMA KUIN EDELLINEN
+        elif merkkijono[i] == merkkijono[i-1]:
+            alimerkkijono = merkkijono[i]
+            alimerkkijonon_pituus = 1
+
+        # JOS KIRJAIN AAKKOSISSA MYÖHÄISEMPI KUIN EDELLINEN
+        elif merkkijono[i] > merkkijono[i-1]:
+            alimerkkijono += merkkijono[i]
+            alimerkkijonon_pituus += 1
+
+        if alimerkkijonon_pituus > pisin_alimerkkijonon_pituus:
+            pisin_alimerkkijono = alimerkkijono
+            pisin_alimerkkijonon_pituus = alimerkkijonon_pituus
+
+        else:
+            alimerkkijono = merkkijono[i]
+            alimerkkijonon_pituus = 1
+
+    return pisin_alimerkkijono
 
 
 def main():
