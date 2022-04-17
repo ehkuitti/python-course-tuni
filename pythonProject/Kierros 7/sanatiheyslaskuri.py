@@ -9,31 +9,16 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 
 def main():
-    i = 0
-    input_taulukko = []
-    sanakirja_tulostaulu = {}
-    syote = ""
-    syote_pienilla_kirjaimilla = ""
-    splitattu_pienten_kirjainten_syote = ""
 
-    print("Enter rows of text for word counting. Empty row to quit.")
-    syote = input()
+    input_dictionary = {}
 
-    while syote != "":
-        syote = input()
-        syote_pienilla_kirjaimilla = syote.lower()
-        splitattu_pienten_kirjainten_syote = syote_pienilla_kirjaimilla.split()
-        input_taulukko.append(splitattu_pienten_kirjainten_syote)
+    my_input = input("Enter rows of text for word counting. Empty row to quit.")
 
-    while i < len(input_taulukko):
+    lowercase_input = my_input.lower()
+    split_lowecase_input = lowercase_input.split()
 
-        if input_taulukko[i] not in sanakirja_tulostaulu:
-            sanakirja_tulostaulu[input_taulukko[i]] = \
-                input_taulukko[i]
-
-        i += 1
-
-    print("Tulostaulu: ", sanakirja_tulostaulu)
+    while my_input != "":
+        my_input = input()
 
 
 if __name__ == "__main__":
