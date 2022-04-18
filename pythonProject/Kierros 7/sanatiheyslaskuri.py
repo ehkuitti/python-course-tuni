@@ -19,7 +19,7 @@ def count_amount_of_a_word():
     my_split_input = ""
     my_dict = {}
     is_input_valid = True
-    word_count = 0
+    word_i_count = 0
 
     print("Enter rows of text for word counting. Empty row to quit.")
 
@@ -37,22 +37,25 @@ def count_amount_of_a_word():
                 = my_lowercase_input.split()
 
         lenght_of_my_split_input = len(my_split_input)
+        i_value_in_memory = 0
 
         for i in range(0, lenght_of_my_split_input, 1):
 
-            # Jos tiettyä sanaa ei löydy sanakirjasta, se lisätään sinne
-            # avaimeksi. Sen arvoksi annetaan määrä, joka on indeksi + 1 (
-            # indeksointi alkaa nollasta, positiivinen määrä ei).
+            # Lisää arvoja taulukkoon
             my_list.append(my_split_input[i])
+            # print("My list in for loop: ", my_list)
 
-            # Tällä koodilla listään arvoja
-            # my_dict[my_split_input[i]] = my_split_input.count(
-            #     my_split_input[i])
+        i = 0
+        while i < lenght_of_my_split_input:
+            word_i_count = my_list.count(my_split_input[i])
+            # print("My i word count: ", word_i_count)
+            i += 1
 
-
+        my_dict[my_split_input[i-1]] = word_i_count
 
     print("My dict: ", my_dict)
     print("My list: ", my_list)
+    # print("Sassia count: ", my_list.count("sassia"))
 
 
 def main():
