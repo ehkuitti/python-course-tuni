@@ -10,6 +10,7 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 def count_amount_of_a_word():
 
+    amount_of_found_words = 0
     lenght_of_my_split_input = ""
     my_input = ""
     my_lowercase_input = ""
@@ -34,15 +35,20 @@ def count_amount_of_a_word():
 
         lenght_of_my_split_input = len(my_split_input)
 
+        amount_of_found_words = 0
+
         for i in range(0, lenght_of_my_split_input, 1):
 
             # Jos tiettyä sanaa ei löydy sanakirjasta, se lisätään sinne
             # avaimeksi. Sen arvoksi annetaan määrä, joka on indeksi + 1 (
             # indeksointi alkaa nollasta, positiivinen määrä ei).
             if my_split_input[i] not in my_dict:
-                my_dict[my_split_input[i]] = i+1
+                amount_of_found_words += 1
+                my_dict[my_split_input[i]] = amount_of_found_words
 
-            # elif my_split_input[i] in my_dict:
+            else:
+                amount_of_found_words += 1
+                my_dict[my_split_input[i]] = amount_of_found_words
 
 
     print(my_dict)
