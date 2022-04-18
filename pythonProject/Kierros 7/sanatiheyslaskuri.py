@@ -9,14 +9,17 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 
 def count_amount_of_a_word():
-
+    """Funktion tarkoituskena on tallentaa sanoja taulukkoon ja laskea niiden
+    määriä."""
     amount_of_found_words = 0
     lenght_of_my_split_input = ""
     my_input = ""
+    my_list = []
     my_lowercase_input = ""
     my_split_input = ""
     my_dict = {}
     is_input_valid = True
+    word_count = 0
 
     print("Enter rows of text for word counting. Empty row to quit.")
 
@@ -35,23 +38,22 @@ def count_amount_of_a_word():
 
         lenght_of_my_split_input = len(my_split_input)
 
-        amount_of_found_words = 0
-
         for i in range(0, lenght_of_my_split_input, 1):
 
             # Jos tiettyä sanaa ei löydy sanakirjasta, se lisätään sinne
             # avaimeksi. Sen arvoksi annetaan määrä, joka on indeksi + 1 (
             # indeksointi alkaa nollasta, positiivinen määrä ei).
-            if my_split_input[i] not in my_dict:
-                amount_of_found_words += 1
-                my_dict[my_split_input[i]] = amount_of_found_words
+            my_list.append(my_split_input[i])
 
-            else:
-                amount_of_found_words += 1
-                my_dict[my_split_input[i]] = amount_of_found_words
+            # Tällä koodilla listään arvoja
+            # my_dict[my_split_input[i]] = my_split_input.count(
+            #     my_split_input[i])
 
 
-    print(my_dict)
+
+    print("My dict: ", my_dict)
+    print("My list: ", my_list)
+
 
 def main():
 
