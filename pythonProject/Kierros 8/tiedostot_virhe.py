@@ -10,7 +10,6 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 def main():
     filename = input("Enter the name of the file: ")
-    file = ""
 
     # Koodirivit, joiden suorituksessa saattaa tapahtua virhe, sijoitetaan
     # try-lohkon sisään:
@@ -45,7 +44,7 @@ def main():
         i += 1
 
     # Kun tiedosto on käsitelty loppuun, se kannattaa sulkea close-metodilla.
-    # file.close()
+    file.close()
 
 
 if __name__ == "__main__":
