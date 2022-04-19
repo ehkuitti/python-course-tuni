@@ -13,9 +13,19 @@ variable controls the loop.
 """
 
 
-def main():
+def print_box(width_of_the_frame, height_of_the_frame, mark_input):
+    """ Tämän funktion tarkoituksena on tulostaa ruudukko, joka
+        saa kokonsa ja merkkinsä mainista parametreinä."""
+    print("")
+    for i in range(0, height_of_the_frame):
+        print(width_of_the_frame * mark_input, sep="", end="")
+        print("")
+        i += 1
 
-    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ TYYPPIPAREITTAIN)
+
+def read_input():
+    """Funktio lukee syötettä niin kauan kunnes se saa vastaan kunnollisia
+    arvoja."""
     height_of_the_frame = 0
     width_of_the_frame = 0
 
@@ -34,7 +44,7 @@ def main():
             try:
                 width_of_the_frame = int(inner_input)
 
-                if base_length > 0:
+                if width_of_the_frame > 0:
                     invalid_inner_input = False
 
                 else:
@@ -53,7 +63,7 @@ def main():
         try:
             height_of_the_frame = int(outer_input)
 
-            if base_length > 0:
+            if height_of_the_frame > 0:
                 invalid_outer_input = False
 
             else:
@@ -66,8 +76,11 @@ def main():
             continue
 
     mark_input = input("Enter a print mark: ")
+    print_box(width_of_the_frame, height_of_the_frame, mark_input)
 
 
+def main():
+    read_input()
 
 
 if __name__ == "__main__":
