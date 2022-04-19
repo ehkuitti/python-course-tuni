@@ -10,11 +10,12 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 def main():
 
+    file_line = ""
     filename = ""
     dictionary = {}
+    split_file_line = []
 
     filename = input("Enter the name of the score file: ")
-    print("Contestant score: ")
 
     try:
         file = open(filename, mode="r")
@@ -22,6 +23,11 @@ def main():
         for file_line in file:
 
             split_file_line = file_line.split()
+            lenght_of_split_file_line = len(split_file_line)
+            if lenght_of_split_file_line < 2:
+                print("There was an erroneous line in the file:")
+                print(file_line, end="")
+                return
 
             index_1_as_int = int(split_file_line[1])
 
@@ -37,14 +43,16 @@ def main():
 
         sorted_dictionary = dict(sorted(dictionary.items()))
 
+        print("Contestant score: ")
         for key, value in sorted_dictionary.items():
             print(key, value)
 
-
-
-
     except OSError:
-        print("Error opening file!")
+        print("There was an error in reading the file.")
+
+    except ValueError:
+        print("There was an erroneous score in the file:")
+        print(split_file_line[1])
 
 
 if __name__ == "__main__":
