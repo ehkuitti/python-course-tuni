@@ -40,7 +40,6 @@ def count_amount_of_a_word():
         i_value_in_memory = 0
 
         for i in range(0, lenght_of_my_split_input, 1):
-
             # Lisää arvoja taulukkoon
             my_list.append(my_split_input[i])
             # print("My list in for loop: ", my_list)
@@ -51,7 +50,7 @@ def count_amount_of_a_word():
             # print("My i word count: ", word_i_count)
             i += 1
 
-        my_dict[my_split_input[i-1]] = word_i_count
+        my_dict[my_split_input[i - 1]] = word_i_count
 
     print("My dict: ", my_dict)
     print("My list: ", my_list)
@@ -59,9 +58,39 @@ def count_amount_of_a_word():
 
 
 def main():
-
     count_amount_of_a_word()
 
 
+"""
 if __name__ == "__main__":
     main()
+
+length_of_my_input = len(my_input)
+
+for j in range(0, length_of_my_input, 1):
+
+    split_my_input = my_input.split()
+    length_of_split_my_input = len(my_input)
+
+    # index_1_as_int = int(split_sentence[1])
+
+    for j in range(0, length_of_split_my_input, 1):
+
+        if split_my_input[j] == split_my_input[-1]:
+            is_word_traversion_over = True
+
+        if split_my_input[j] in dictionary:
+            dictionary[split_my_input[j]] = dictionary.get(
+                split_my_input[j]) + split_my_input[j].count(
+                split_my_input[j])
+
+        else:
+            dictionary[split_my_input[j]] = split_my_input[j].count(
+                split_my_input[j])
+
+        if is_word_traversion_over:
+            break
+
+    break
+
+"""

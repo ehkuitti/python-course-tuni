@@ -4,63 +4,43 @@ Student Id: 150541820
 Name:   Eetu Kuittinen
 Email:  eetu.kuittinen@tuni.fi
 
-TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
+Ohjelma lukee arvoja ja syöttää niitä sanakirjaan. Laskee sanakirjan sanojen
+määrän.
 """
 
 
 def main():
-
-    my_input = ""
-    filename = ""
-    dictionary = {}
-    split_my_input = []
-    length_of_my_input = 0
-    length_of_split_my_input = 0
+    syote = ""
+    sanakirja = {}
+    splitattu_syote = []
+    syotteen_pituus = 0
+    splitatun_syotteen_pituus = 0
+    i = 0
 
     print("Enter rows of text for word counting. Empty row to quit.")
 
     while True:
 
-        my_input = input()
+        syote = input()
 
         # Luuppi kaadetaan tyhjällä merkkijonolla, käytännössä pelkän enterin
         # syöttämisellä
-        if my_input == "":
+        if syote == "":
             break
 
-        length_of_my_input = len(my_input)
+        sanat = syote.split()
 
-        for i in range(0, length_of_my_input, 1):
+        for sana in sanat:
+            if sana.lower() not in sanakirja:
+                sanakirja[sana.lower()] = 1
+            else:
+                sanakirja[sana.lower()] += 1
 
-            split_my_input = my_input.split()
-            length_of_split_my_input = len(my_input)
+    sortattu_sanakirja = dict(sorted(sanakirja.items()))
 
-            # index_1_as_int = int(split_sentence[1])
+    for sana, arvo in sortattu_sanakirja.items():
+        print(f"{sana} : {arvo} times")
 
-            for j in range(0, length_of_split_my_input, 1):
-
-                if split_my_input[j] in dictionary:
-                    dictionary[split_my_input[j]] = dictionary.get(
-                        split_my_input[j]) + split_my_input[j].count(
-                        split_my_input[j])
-
-                else:
-                    dictionary[split_my_input[j]] = split_my_input[j].count(
-                        split_my_input[j])
-
-            # print("Sanakirjan sisältö rivillä 33: ", dictionary)
-    
-        # print("Sortattu dictionary: ", sorted_dictionary)
-    
-        # sorted_dictionary = dict(sorted(dictionary.items()))
-        print("Haloust world!")
-
-        # print("Contestant score: ")
-        for key, value in sorted_dictionary.items():
-            print(key, value)
-    
 
 if __name__ == "__main__":
     main()
-
-# print("Arvot splitatussa taulukossa: ", split_file_line)
