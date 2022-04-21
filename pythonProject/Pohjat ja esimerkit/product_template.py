@@ -9,32 +9,15 @@ class Product:
     This class defines a simplified product for sale in a store.
     """
 
-    def __init__(self, name="Product", normal_price=0.00,
-                 sale_percentage=0.00,
-                 sale_price=0.00):
-
-        self.__name = name
-        self.__sale_price = sale_price
-        self.__sale_percentage = sale_percentage
-        self.__normal_price = normal_price
-
-    def get_price(self):
-        if self.__sale_percentage == 0.00:
-            return self.__normal_price
-
-        else:
-            return self.__sale_price
-
-    def set_sale_percentage(self, sale_percentage):
-        self.__sale_percentage = sale_percentage
-        self.__sale_price = (100 - self.__sale_percentage) / 100 \
-                            * self.__normal_price
-        return self.__sale_price
-
-    def printout(self):
-        print(self.__name)
-        print(f"  price: {self.__normal_price:.2f}")
-        print(f"  sale%: {self.__sale_percentage:.2f}")
+    # TODO: Define all the methods here.  You can see what they are,
+    #       what parameters they take, and what their return value is
+    #       by examining the main-function carefully.
+    #
+    #       You also need to consider which attributes the class needs.
+    #
+    #       You are allowed to modify the main function, but your
+    #       methods have to stay compatible with the original
+    #       since the automatic tests assume that.
 
 
 def main():
