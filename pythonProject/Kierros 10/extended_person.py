@@ -8,7 +8,7 @@ class Person:
     This class models a person with a simple electronic wallet.
     """
 
-    def __init__(self, name, initial_money, address):
+    def __init__(self, name, initial_money, address, old_address="tie"):
         """
         A person object is initialized with the name and
         the initial amount of money in the wallet.
@@ -22,6 +22,7 @@ class Person:
         self.__name = name
         self.__money = initial_money
         self.__address = address
+        self.__oldaddress = old_address
 
     def printout(self):
         """
@@ -30,10 +31,13 @@ class Person:
         for debugging and testing purposes.
         """
 
-        print("—" * 25)
-        print("Name:   ", self.__name)
-        print("Wealth: ", self.__money)
-        print("Address: ", self.__address)
+        if not (self.__address == self.__oldaddress):
+            print("—" * 25)
+            print("Name:   ", self.__name)
+            print("Wealth: ", self.__money)
+            print("Address:", self.__address)
+
+        self.__oldaddress = self.__address
 
     def add_money(self, amount):
         """
@@ -67,22 +71,32 @@ class Person:
             self.__money -= price
 
     def move(self, address):
+
+        # onko_osoite_sama = False
+
+        # if address == self.__address:
+        #     onko_osoite_sama = True
+
         self.__address = address
+
+        # if not onko_osoite_sama:
+        self.printout()
 
 
 def main():
     # Let's create an object of type Person, name it denzil,
     # and use to spy on Prof. Dexter's spending.
-    denzil = Person("Denzil Dexter", 100.00, "320 Memorial Dr.")
+    person = Person("Dave", 0.0, "Vaajakatu 5")
 
     # State of Denzil
-    denzil.printout()
+    person.printout()
 
     # Denzil moves out of a dormitory to a place of his own.
-    denzil.move("20 Chestnut St.")
+    person.move("Iidesranta 3")
+    person.move("Iidesranta 3")
 
-    # Where's Denzil after the move.
-    denzil.printout()
+    person.move("Pyykkiojankatu 2")
+    person.move("Pyykkiojankatu 2")
 
 
 if __name__ == "__main__":
