@@ -51,6 +51,8 @@ def read_file(str_tiedostonimi):
             skype_puuttuu = True
 
 
+
+
 def main():
     str_tiedostonimi = ""
     str_tiedostonimi = input("Syötä tiedostonimi: ")
