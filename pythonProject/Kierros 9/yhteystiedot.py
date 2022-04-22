@@ -24,6 +24,7 @@ def read_file(str_tiedostonimi):
 
     # SANAKIRJAT
     dict_kontaktit = {}
+    dict_arvot = {}
 
     # TOTUUSARVOT
     skype_puuttuu = False
@@ -50,6 +51,29 @@ def read_file(str_tiedostonimi):
         if str_stripattu_skype == "":
             skype_puuttuu = True
 
+        for avain in dict_kontaktit:
+            dict_kontaktit[str_stripattu_avain] = dict_arvot
+
+            if skype_puuttuu:
+                dict_arvot[name] = str_stripattu_nimi
+                dict_arvot[phone] = str_stripattu_puhnro
+                dict_arvot[email] = str_stripattu_email
+
+            # Jos Skype ei ei-puutu eli Skype on tiedossa
+            elif not skype_puuttuu:
+                dict_arvot[name] = str_stripattu_nimi
+                dict_arvot[phone] = str_stripattu_puhnro
+                dict_arvot[email] = str_stripattu_email
+                dict_arvot[skype] = str_stripattu_skype
+
+        syote = input()
+        splitattu_syote = syote.split("]")
+        syote_avain = splitattu.syote[0]
+        syote_arvo = splitattu_syote[1]
+
+        for avain in dict_kontaktit.iterkeys():
+            for alkiot in dict_kontaktit[avain]:
+                
 
 
 
