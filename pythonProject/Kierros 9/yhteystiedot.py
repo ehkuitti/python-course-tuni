@@ -68,11 +68,13 @@ def read_file(str_tiedostonimi):
 
         syote = input()
         splitattu_syote = syote.split("]")
-        syote_avain = splitattu.syote[0]
+        syote_avain = splitattu_syote[0]
         syote_arvo = splitattu_syote[1]
-
-        for avain in dict_kontaktit.iterkeys():
-            for alkiot in dict_kontaktit[avain]:
+        #
+        # for avain, arvo in dict_kontaktit.items()
+        #     if avain == syote_avain:
+        #         for alkio in dict_arvot:
+        #             dict_kontaktit
                 
 
 
