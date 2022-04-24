@@ -9,81 +9,69 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 
 def read_file(str_tiedostonimi):
+    """Lukee tiedostosta rivejä sanakirjaan. Sanakirjaan tallennetaan
+    avaimeksi rivin avain ja pariksi sanakirja, jossa loput tiedot."""
 
-    # MUUTTUJIEN ALUSTUKSET (MUUTTUJATYYPPEINEEN)
+    # MUUTTUJIEN ALUSTUKSET (TYYPPEINEEN, AAKKOSJÄRJESTYKSESSÄ)
 
-    # LISTAT
-    lst_kontaktit = []
+    # Listat
+    lst_tiedostorivi_splitattuna = []
 
-    # MERKKIJONOT
-    str_stripattu_avain = ""
-    str_stripattu_nimi = ""
-    str_stripattu_puhnro = ""
-    str_stripattu_email = ""
-    str_stripattu_skype = ""
+    # Merkkijonot
+    # str_tiedostonimi = ""
 
-    # SANAKIRJAT
-    dict_kontaktit = {}
+    # Sanakirjat
+    dict_yhteystiedot = {}
     dict_arvot = {}
-
-    # TOTUUSARVOT
-    skype_puuttuu = False
 
     try:
         tiedosto = open(str_tiedostonimi, mode="r")
 
     except OSError:
-        print(f"Error: Opening the file '{str_tiedostonimi} failed!")
+        print(f"Virhe: Tiedostoa nimellä {str_tiedostonimi} ei löytynyt.")
         return
 
     for rivi in tiedosto:
-        # Splitataan tiedoston yksittäinen rivi alkiotaulukoksi puolipisteen
-        # kohdalta
-        lst_kontaktit = rivi.split(";", maxsplit=-1)
+        str_tiedostonimi_stripattuna = rivi.strip()
+        lst_tiedostorivi_splitattuna = str_tiedostonimi_stripattuna.split(";")
 
-        # Stripataan tiedostot whitespaceistä
-        str_stripattu_avain = lst_kontaktit[0].strip()
-        str_stripattu_nimi = lst_kontaktit[1].strip()
-        str_stripattu_puhnro = lst_kontaktit[2].strip()
-        str_stripattu_email = lst_kontaktit[3].strip()
-        str_stripattu_skype = lst_kontaktit[4].strip()
+        solu_avain = lst_tiedostorivi_splitattuna[0]
+        solu_nimi = lst_tiedostorivi_splitattuna[1]
+        solu_puhnro = lst_tiedostorivi_splitattuna[2]
+        solu_meili = lst_tiedostorivi_splitattuna[3]
+        solu_skype = lst_tiedostorivi_splitattuna[4]
 
-        if str_stripattu_skype == "":
-            skype_puuttuu = True
+        dict_arvot["name"] = solu_nimi
+        dict_arvot["phone"] = solu_puhnro
+        dict_arvot["email"] = solu_meili
+        dict_arvot["skype"] = solu_skype
 
-        for avain in dict_kontaktit:
-            dict_kontaktit[str_stripattu_avain] = dict_arvot
+        # Tiedot tallennetaan pariksi sanakirjaan. Avaimena toimii rivin
+        # avain ja parina on sanakirja, josta löytyy loput tiedot.
 
-            if skype_puuttuu:
-                dict_arvot[name] = str_stripattu_nimi
-                dict_arvot[phone] = str_stripattu_puhnro
-                dict_arvot[email] = str_stripattu_email
+        dict_yhteystiedot[solu_avain] = dict_arvot.copy()
 
-            # Jos Skype ei ei-puutu eli Skype on tiedossa
-            elif not skype_puuttuu:
-                dict_arvot[name] = str_stripattu_nimi
-                dict_arvot[phone] = str_stripattu_puhnro
-                dict_arvot[email] = str_stripattu_email
-                dict_arvot[skype] = str_stripattu_skype
+    # for avain, sanakirja in dict_yhteystiedot.items():
+    #
+    #     if avain == haettavan_henkilon_nimi:
+    #         for sisainen_avain, sisainen_arvo in dict_arvot.items():
+    #             if sisainen_avain == haettava_asia:
+    #                 pass
 
-        syote = input()
-        splitattu_syote = syote.split("]")
-        syote_avain = splitattu_syote[0]
-        syote_arvo = splitattu_syote[1]
-        #
-        # for avain, arvo in dict_kontaktit.items()
-        #     if avain == syote_avain:
-        #         for alkio in dict_arvot:
-        #             dict_kontaktit
-                
-
-
+    return dict_yhteystiedot
 
 def main():
-    str_tiedostonimi = ""
-    str_tiedostonimi = input("Syötä tiedostonimi: ")
 
-    read_file(str_tiedostonimi)
+    tiedostonimi = ""
+    nimi = ""
+    haettava_asia = ""
+
+    tiedostonimi = input("Anna tiedostonimi: ")
+    nimi = input("Anna henkilön nimi: ")
+    puhnro = input("Anna haettava asia: ")
+
+    paluuarvo = read_file(tiedostonimi)
+    print(paluuarvo)
 
 
 if __name__ == "__main__":
