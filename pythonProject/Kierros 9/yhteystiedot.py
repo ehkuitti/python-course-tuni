@@ -60,6 +60,7 @@ def read_file(str_tiedostonimi):
 
     return dict_yhteystiedot
 
+
 def main():
 
     tiedostonimi = ""
