@@ -8,7 +8,7 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 """
 
 
-def lue_tiedosto():
+def avaa_tiedosto():
     """Funktio kysyy käyttäjältä tiedostonimeä ja yrittää avata sen nimistä
     tiedostoa samasta kansiosta, jossa tämä tiedosto sijaitsee. Avauksen
     epäonnistuessa tulostetaan virhe ja ohjelma sammutetaan. Funktio ei ota
@@ -28,9 +28,25 @@ def lue_tiedosto():
     return tiedosto
 
 
+def lue_tiedosto_tietorakenteeseen(tiedosto):
+
+    puolipisteiden_maara = 0
+    rivi_stripattuna = ""
+
+    for rivi in tiedosto:
+        rivi_stripattuna = rivi.strip()
+        puolipisteiden_maara = rivi_stripattuna.count(";")
+        if puolipisteiden_maara < 2:
+            print("Error in file!")
+            return
+
+    return tiedosto
+
+
 def main():
 
-    tiedosto = lue_tiedosto()
+    tiedosto = avaa_tiedosto()
+    tietorakenne = lue_tiedosto_tietorakenteeseen(tiedosto)
 
 
 if __name__ == "__main__":
