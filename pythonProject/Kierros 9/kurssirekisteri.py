@@ -28,15 +28,36 @@ def avaa_tiedosto():
     return tiedosto
 
 
-def lue_tiedosto_tietorakenteeseen(tiedosto):
+def onko_rivilla_tarpeeksi_puolipisteita(rivi):
+    """Funktio tarkistaa, onko annetulla tiedostorivillä tarpeeksi
+    puolipisteitä. Palauttaa True eli \"kyllä\", mikäli rivillä on tarpeeksi
+    monta puolipistettä. Muuten false eli \"ei\"."""
 
     puolipisteiden_maara = 0
+
+    puolipisteiden_maara = rivi.count(";")
+
+    return puolipisteiden_maara >= 2
+
+
+def poista_rivilta_ylimaaraiset_valilyonnit(rivi):
+
     rivi_stripattuna = ""
 
+    rivi_stripattuna = rivi.strip()
+
+    return rivi_stripattuna
+
+
+def lue_tiedosto_tietorakenteeseen(tiedosto):
+
+    valilyonniton_rivi = ""
+    onko_rivi_tarpeeksi_pitka = False
+
     for rivi in tiedosto:
-        rivi_stripattuna = rivi.strip()
-        puolipisteiden_maara = rivi_stripattuna.count(";")
-        if puolipisteiden_maara < 2:
+        valilyonniton_rivi = poista_rivilta_ylimaaraiset_valilyonnit(rivi)
+        onko_rivi_tarpeeksi_pitka = onko_rivilla_tarpeeksi_puolipisteita(rivi)
+        if onko_rivi_tarpeeksi_pitka:
             print("Error in file!")
             return
 
