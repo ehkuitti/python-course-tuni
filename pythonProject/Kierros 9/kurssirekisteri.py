@@ -42,11 +42,11 @@ def onko_rivilla_tarpeeksi_puolipisteita(rivi):
 
 def poista_rivilta_ylimaaraiset_valilyonnit(rivi):
 
-    rivi_stripattuna = ""
+    valilyonniton_rivi = ""
 
-    rivi_stripattuna = rivi.strip()
+    valilyonniton_rivi = rivi.strip()
 
-    return rivi_stripattuna
+    return valilyonniton_rivi
 
 
 def lue_tiedosto_tietorakenteeseen(tiedosto):
