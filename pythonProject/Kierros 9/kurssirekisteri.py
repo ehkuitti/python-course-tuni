@@ -115,10 +115,6 @@ def komento_tulosta_kaikki(opintotietokanta):
             print(f"{kurssin_nimi} : {opintopisteet} cr")
 
 
-def komento_lisaa():
-    pass
-
-
 def komento_tulosta_laitos(komento, opintotietokanta):
     """"""
 
@@ -169,8 +165,106 @@ def komento_tulosta_opintopisteiden_maara(komento, opintotietokanta):
           f"{opintopisteiden_kokonaismaara} cr.")
 
 
-def komento_lisaa_kurssi(komento, opintotietokanta):
+def komento_lisaa_laitos_tai_kurssi(komento, opintotietokanta):
 
+    komento_merkki = ""
+    komento_laitos = ""
+    komennon_pituus = 0
+    pilkotun_komennon_pituus = 0
+    lista_kurssin_tiedoista = []
+    uusi_lista = []
+
+    pilkottu_komento = pilko_listaksi(komento)
+    pilotun_komennon_pituus = len(pilkottu_komento)
+
+    komento_merkki = pilkottu_komento[0]
+    komento_laitos = pilkottu_komento[1]
+    komento_laajuus = pilkottu_komento[-1]
+
+    lista_kurssin_tiedoista = pilkottu_komento[2:pilotun_komennon_pituus]
+    listan_pituus = len(lista_kurssin_tiedoista)
+    kurssin_tiedot_merkkijonona = " ".join(lista_kurssin_tiedoista[
+                                           0:listan_pituus-1])
+
+    uusi_lista.append(komento_laitos)
+    uusi_lista.append(kurssin_tiedot_merkkijonona)
+    uusi_lista.append(komento_laajuus)
+
+    laitos = uusi_lista[0]
+    kurssin_nimi = uusi_lista[1]
+    kurssin_laajuus = uusi_lista[2]
+
+    if komento_laitos in opintotietokanta:
+        for laitoksen_nimi, kurssin_tiedot in sorted(opintotietokanta.items()):
+            if komento_laitos == laitoksen_nimi:
+                opintotietokanta[laitoksen_nimi][kurssin_nimi] = kurssin_laajuus
+
+        print(f"Added course {kurssin_nimi} to department {laitos}")
+
+    # Jos laitos puuttuu
+    else:
+        opintotietokanta[laitos] = {kurssin_nimi: kurssin_laajuus}
+        print(f"Added department {laitos} with course {kurssin_nimi}")
+
+
+def komento_poista_laitos_tai_kurssi(komento, opintotietokanta):
+    komento_merkki = ""
+    komento_laitos = ""
+    komennon_pituus = 0
+    pilkotun_komennon_pituus = 0
+    lista_kurssin_tiedoista = []
+    uusi_lista = []
+
+    pilkottu_komento = pilko_listaksi(komento)
+    pilotun_komennon_pituus = len(pilkottu_komento)
+
+    komento_merkki = pilkottu_komento[0]
+    komento_laitos = pilkottu_komento[1]
+    komento_laajuus = pilkottu_komento[-1]
+
+    lista_kurssin_tiedoista = pilkottu_komento[2:pilotun_komennon_pituus]
+    listan_pituus = len(lista_kurssin_tiedoista)
+    kurssin_tiedot_merkkijonona = " ".join(lista_kurssin_tiedoista[
+                                           0:listan_pituus - 1])
+
+    uusi_lista.append(komento_laitos)
+    uusi_lista.append(kurssin_tiedot_merkkijonona)
+    uusi_lista.append(komento_laajuus)
+
+    laitos = uusi_lista[0]
+    kurssin_nimi = uusi_lista[1]
+    kurssin_laajuus = uusi_lista[2]
+
+    if listan_pituus == 2:
+
+        # 2 sanan tapaus, jossa haluttua laitosta ei löydy sanakirjasta
+        if komento_laitos not in opintotietokanta:
+            print(f"Department {komento_laitos} not found!")
+            return
+
+        # 2 sanan tapaus, jossa haluttua laitos löytyy sanakirjasta
+        else:
+            for laitoksen_nimi in opintotietokanta:
+                if laitoksen_nimi == komento_laitos:
+                    opintotietokanta.pop(komento_laitos)
+                    print(f"Department {laitoksen_nimi} removed.")
+
+    else:
+
+        if komento_laitos not in opintotietokanta:
+            print(f"Department {komento_laitos} not found!")
+            return
+
+        elif komento_laitos[kurssin_nimi] not in opintotietokanta:
+            print(f"Course {kurssin_nimi} from {komento_laitos} not found!")
+            return
+
+        else:
+            for laitoksen_nimi in opintotietokanta:
+                if laitoksen_nimi[kurssin_nimi] == kurssin_nimi:
+                    opintotietokanta.pop(laitoksen_nimi[kurssin_nimi])
+                    print(f"Department {laitoksen_nimi} course {kurssin_nimi} "
+                          f"removed.")
 
 
 def main():
@@ -196,19 +290,22 @@ def main():
               "department / [Q]uit")
         komento = input("Enter command: ")
 
-        if komento.lower() == "a":
-            komento_lisaa()
-
-        elif komento.lower() == "p":
+        if komento[0].lower() == "p":
             komento_tulosta_kaikki(opintotietokanta)
 
-        elif komento.find("c") != -1:
+        elif komento[0].lower() == "c":
             komento_tulosta_opintopisteiden_maara(komento, opintotietokanta)
 
-        elif komento.find("r") != -1:
+        elif komento[0].lower() == "r":
             komento_tulosta_laitos(komento, opintotietokanta)
 
-        elif komento.lower() == LOPETUSKOMENTO:
+        elif komento[0].lower() == "a":
+            komento_lisaa_laitos_tai_kurssi(komento, opintotietokanta)
+
+        elif komento[0].lower() == "d":
+            komento_poista_laitos_tai_kurssi(komento, opintotietokanta)
+
+        elif komento[0].lower() == LOPETUSKOMENTO:
             print("Ending program!")
             return
 
