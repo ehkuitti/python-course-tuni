@@ -9,6 +9,7 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 
 # Globaalit muuttujat
 VAADITTU_MAARA_PUOLIPISTEITA_RIVILLA = 2
+LOPETUSKOMENTO = "q"
 
 
 def avaa_tiedosto():
@@ -56,10 +57,10 @@ def poista_rivilta_ylimaaraiset_valilyonnit(rivi):
     return rivi_ilman_valilyonteja
 
 
-def pilko_rivi_listaksi(rivi):
-    rivi_listana = rivi.split(";")
+def pilko_listaksi(syote, erotinmerkki=" "):
+    listana = syote.split(erotinmerkki)
 
-    return rivi_listana
+    return listana
 
 
 def lue_tiedosto_sanakirjaan(tiedosto):
@@ -69,6 +70,7 @@ def lue_tiedosto_sanakirjaan(tiedosto):
     pilkottu_rivi = []
 
     # Merkkijonot
+    erotinmerkki = ";"
     kasiteltava_rivi = ""
     kurssi = ""
     laajuus = ""
@@ -90,7 +92,7 @@ def lue_tiedosto_sanakirjaan(tiedosto):
             print("Error in file!")
             return
 
-        pilkottu_rivi = pilko_rivi_listaksi(kasiteltava_rivi)
+        pilkottu_rivi = pilko_listaksi(kasiteltava_rivi, erotinmerkki)
 
         laitos = pilkottu_rivi[0]
         kurssi = pilkottu_rivi[1]
@@ -106,6 +108,7 @@ def lue_tiedosto_sanakirjaan(tiedosto):
 
 def komento_tulosta_kaikki(opintotietokanta):
     print()
+
     for laitoksen_nimi, kurssin_tiedot in sorted(opintotietokanta.items()):
         print(f"*{laitoksen_nimi}*")
         for kurssin_nimi, opintopisteet in sorted(kurssin_tiedot.items()):
@@ -117,9 +120,49 @@ def komento_lisaa():
 
 
 def komento_tulosta_laitos(komento, opintotietokanta):
-    pass
+    """"""
+
+    # MUUTTUJIEN ALUSTUKSET (TYYPEITTÄIN AAKKOSJÄRJESTYKSESSÄ)
+
+    # Listat
+    pilkottu_komento = []
+
+    # Merkkijonot
+    komento_merkki = ""
+    komento_laitos = ""
+
+    pilkottu_komento = pilko_listaksi(komento)
+
+    komento_merkki = pilkottu_komento[0]
+    komento_laitos = pilkottu_komento[1]
+
+    if komento_laitos not in opintotietokanta:
+        print("Department not found!")
+        return
+
+    print()
+    for laitoksen_nimi, kurssin_tiedot in sorted(opintotietokanta.items()):
+        if laitoksen_nimi == komento_laitos:
+            print(f"*{laitoksen_nimi}*")
+            for kurssin_nimi, opintopisteet in sorted(kurssin_tiedot.items()):
+                print(f"{kurssin_nimi} : {opintopisteet} cr")
 
 
+def komento_tulosta_opintopisteiden_maara(komento, opintotietokanta):
+    pilkottu_komento = pilko_listaksi(komento)
+
+    opintopisteiden_kokonaismaara = 0
+
+    komento_merkki = pilkottu_komento[0]
+    komento_laitos = pilkottu_komento[1]
+
+    for laitoksen_nimi, kurssin_tiedot in sorted(opintotietokanta.items()):
+        if laitoksen_nimi == komento_laitos:
+            for kurssin_nimi, opintopisteet in sorted(kurssin_tiedot.items()):
+                opintopisteiden_kokonaismaara += int(opintopisteet)
+
+    print(f"Department {komento_laitos} has to offer "
+          f"{opintopisteiden_kokonaismaara} cr.")
 
 
 def main():
@@ -131,23 +174,35 @@ def main():
     # Sanakirjat
     opintotietokanta = {}
 
+    # Totuusarvot
+    onko_syotetty_lopetuskomento = False
+
     tiedosto = avaa_tiedosto()
     opintotietokanta = lue_tiedosto_sanakirjaan(tiedosto)
     if opintotietokanta is None:
         return
 
-    print("[A]dd / [C]redits / [D]elete / [P]rint all / p[R]int "
-          "department / [Q]uit")
-    komento = input("Enter command: ")
+    while not onko_syotetty_lopetuskomento:
+        print()
+        print("[A]dd / [C]redits / [D]elete / [P]rint all / p[R]int "
+              "department / [Q]uit")
+        komento = input("Enter command: ")
 
-    if komento.upper() == "A":
-        komento_lisaa()
+        if komento.lower() == "a":
+            komento_lisaa()
 
-    elif komento.find("r") != -1:
-        komento_tulosta_laitos(komento, opintotietokanta)
+        elif komento.lower() == "p":
+            komento_tulosta_kaikki(opintotietokanta)
 
-    elif komento.upper() == "P":
-        komento_tulosta_kaikki(opintotietokanta)
+        elif komento.find("c") != -1:
+            komento_tulosta_opintopisteiden_maara(komento, opintotietokanta)
+
+        elif komento.find("r") != -1:
+            komento_tulosta_laitos(komento, opintotietokanta)
+
+        elif komento.lower() == LOPETUSKOMENTO:
+            print("Ending program!")
+            return
 
 
 if __name__ == "__main__":
