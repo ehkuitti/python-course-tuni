@@ -156,6 +156,10 @@ def komento_tulosta_opintopisteiden_maara(komento, opintotietokanta):
     komento_merkki = pilkottu_komento[0]
     komento_laitos = pilkottu_komento[1]
 
+    if komento_laitos not in opintotietokanta:
+        print("Department not found!")
+        return
+
     for laitoksen_nimi, kurssin_tiedot in sorted(opintotietokanta.items()):
         if laitoksen_nimi == komento_laitos:
             for kurssin_nimi, opintopisteet in sorted(kurssin_tiedot.items()):
@@ -163,6 +167,10 @@ def komento_tulosta_opintopisteiden_maara(komento, opintotietokanta):
 
     print(f"Department {komento_laitos} has to offer "
           f"{opintopisteiden_kokonaismaara} cr.")
+
+
+def komento_lisaa_kurssi(komento, opintotietokanta):
+
 
 
 def main():
@@ -203,6 +211,10 @@ def main():
         elif komento.lower() == LOPETUSKOMENTO:
             print("Ending program!")
             return
+
+        else:
+            print("Invalid command!")
+            print()
 
 
 if __name__ == "__main__":
