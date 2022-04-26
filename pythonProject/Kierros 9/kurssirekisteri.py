@@ -62,15 +62,6 @@ def pilko_rivi_listaksi(rivi):
     return rivi_listana
 
 
-def kurssien_tiedot_sanakirjaan(kurssi, laajuus):
-    """Funktio luo sisäisen sanakirjan kurssien tiedoista. Ottaa parametreina
-    halutut tiedot tiedostosta sekä palauttaa täytetyn sanakirjan."""
-
-    kurssien_tiedot = {kurssi: laajuus}
-
-    return kurssien_tiedot
-
-
 def lue_tiedosto_sanakirjaan(tiedosto):
     # MUUTTUJIEN ALUSTUKSET (MUUTTUJATYYPEITTÄIN AAKKOSJÄRJESTYKSESSÄ)
 
@@ -105,19 +96,19 @@ def lue_tiedosto_sanakirjaan(tiedosto):
         kurssi = pilkottu_rivi[1]
         laajuus = pilkottu_rivi[2]
 
-        kurssien_tiedot = kurssien_tiedot_sanakirjaan(kurssi,
-                                                      laajuus).copy()
-
-        opintotietokanta[laitos] = kurssien_tiedot.copy()
+        if laitos in opintotietokanta:
+            opintotietokanta[laitos][kurssi] = laajuus
+        else:
+            opintotietokanta[laitos] = {kurssi: laajuus}
 
     return opintotietokanta
 
 
 def komento_tulosta_kaikki(opintotietokanta):
     print()
-    for laitoksen_nimi, kurssin_tiedot in opintotietokanta.items():
+    for laitoksen_nimi, kurssin_tiedot in sorted(opintotietokanta.items()):
         print(f"*{laitoksen_nimi}*")
-        for kurssin_nimi, opintopisteet in kurssin_tiedot.items():
+        for kurssin_nimi, opintopisteet in sorted(kurssin_tiedot.items()):
             print(f"{kurssin_nimi} : {opintopisteet} cr")
 
 
