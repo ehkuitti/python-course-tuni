@@ -116,6 +116,12 @@ def komento_lisaa():
     pass
 
 
+def komento_tulosta_laitos(komento, opintotietokanta):
+    pass
+
+
+
+
 def main():
     # MUUTTUJIEN ALUSTUKSET (MUUTTUJATYYPPEITTÄIN AAKKOSJÄRJESTYKSESSÄ)
 
@@ -136,6 +142,9 @@ def main():
 
     if komento.upper() == "A":
         komento_lisaa()
+
+    elif komento.find("r") != -1:
+        komento_tulosta_laitos(komento, opintotietokanta)
 
     elif komento.upper() == "P":
         komento_tulosta_kaikki(opintotietokanta)
