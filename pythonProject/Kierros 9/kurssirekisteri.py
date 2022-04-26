@@ -62,6 +62,15 @@ def pilko_rivi_listaksi(rivi):
     return rivi_listana
 
 
+def kurssien_tiedot_sanakirjaan(kurssi, laajuus):
+    """Funktio luo sisäisen sanakirjan kurssien tiedoista. Ottaa parametreina
+    halutut tiedot tiedostosta sekä palauttaa täytetyn sanakirjan."""
+
+    kurssien_tiedot = {kurssi: laajuus}
+
+    return kurssien_tiedot
+
+
 def lue_tiedosto_sanakirjaan(tiedosto):
     # MUUTTUJIEN ALUSTUKSET (MUUTTUJATYYPEITTÄIN AAKKOSJÄRJESTYKSESSÄ)
 
@@ -75,7 +84,7 @@ def lue_tiedosto_sanakirjaan(tiedosto):
     laitos = ""
 
     # Sanakirjat
-    kurssitietokanta = {}
+    opintotietokanta = {}
 
     # Totuusarvot
     onko_rivilla_tarpeeksi_tietoja = False
@@ -96,7 +105,20 @@ def lue_tiedosto_sanakirjaan(tiedosto):
         kurssi = pilkottu_rivi[1]
         laajuus = pilkottu_rivi[2]
 
-    return tiedosto
+        kurssien_tiedot = kurssien_tiedot_sanakirjaan(kurssi,
+                                                      laajuus).copy()
+
+        opintotietokanta[laitos] = kurssien_tiedot.copy()
+
+    return opintotietokanta
+
+
+def komento_tulosta_kaikki(opintotietokanta):
+    print()
+    for laitoksen_nimi, kurssin_tiedot in opintotietokanta.items():
+        print(f"*{laitoksen_nimi}*")
+        for kurssin_nimi, opintopisteet in kurssin_tiedot.items():
+            print(f"{kurssin_nimi} : {opintopisteet} cr")
 
 
 def komento_lisaa():
@@ -104,18 +126,28 @@ def komento_lisaa():
 
 
 def main():
+    # MUUTTUJIEN ALUSTUKSET (MUUTTUJATYYPPEITTÄIN AAKKOSJÄRJESTYKSESSÄ)
+
+    # Merkkijonot
     komento = ""
 
+    # Sanakirjat
+    opintotietokanta = {}
+
     tiedosto = avaa_tiedosto()
-    tietorakenne = lue_tiedosto_sanakirjaan(tiedosto)
-    if tietorakenne is None:
+    opintotietokanta = lue_tiedosto_sanakirjaan(tiedosto)
+    if opintotietokanta is None:
         return
 
-    komento = input("[A]dd / [C]redits / [D]elete / [P]rint all / p[R]int "
-                    "department / [Q]uit")
+    print("[A]dd / [C]redits / [D]elete / [P]rint all / p[R]int "
+          "department / [Q]uit")
+    komento = input("Enter command: ")
 
     if komento.upper() == "A":
         komento_lisaa()
+
+    elif komento.upper() == "P":
+        komento_tulosta_kaikki(opintotietokanta)
 
 
 if __name__ == "__main__":
