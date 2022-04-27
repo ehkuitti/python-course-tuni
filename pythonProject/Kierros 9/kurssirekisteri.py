@@ -385,8 +385,14 @@ def komento_poista_laitos_tai_kurssi(komento, opintotietokanta):
     pilkottu_komento = pilko_listaksi(komento)
     pilkotun_komennon_pituus = len(pilkottu_komento)
 
-    komento_merkki, komento_laitos = \
-        aseta_lista_alkioiden_arvot_muuttujien_arvoiksi(pilkottu_komento)
+    if pilkotun_komennon_pituus == 2:
+        komento_merkki = pilkottu_komento[0]
+        komento_laitos = pilkottu_komento[1]
+
+    elif pilkotun_komennon_pituus > 2:
+        komento_merkki = pilkottu_komento[0]
+        komento_laitos = pilkottu_komento[1]
+        komento_merkki = pilkottu_komento[2]
 
     if pilkotun_komennon_pituus == 2:
 
@@ -429,7 +435,7 @@ def komento_poista_laitos_tai_kurssi(komento, opintotietokanta):
     elif kurssin_nimi in opintotietokanta[laitos]:
         del opintotietokanta[laitos][kurssin_nimi]
         print(f"Department {laitos} course {kurssin_nimi} "
-              f" removed.")
+              f"removed.")
         # for laitos_avain, kurssi in opintotietokanta.items():
         #     if kurssi == kurssin_nimi:
 
