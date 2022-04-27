@@ -58,12 +58,28 @@ def poista_rivilta_ylimaaraiset_valilyonnit(rivi):
 
 
 def pilko_listaksi(syote, erotinmerkki=" "):
+    # Funktio ottaa parametrina jonkin käyttäjän antaman syötteen sekä
+    # halutun erotinmerkin. Pilkkoo syotteen Pythonin standardikirjaston
+    # str.split() funktiolla ja palauttaa pilkotun listan. Mikäli
+    # funktiokutsussa ei anneta erotinmerkkiä, käyttää erotinmerkkinä yhden
+    # merkin levyistä välilyöntiä.
+
     listana = syote.split(erotinmerkki)
 
     return listana
 
 
 def lue_tiedosto_sanakirjaan(tiedosto):
+    """Funktio ajetaan käyttäjän syötettyä tiedostonimen. Funktio käy
+    annettua tiedostoa läpi ja lisää yksittäisiä rivejä sanakirjaan.
+    Tiedostorivin ensimmäinen alkio on käytetty laitos, joka toimii
+    hakuavaimena ko. sanakirjassa. Sen pariksi tallennetaan sanakirja,
+    jonka pariksi puolestaan tallennetaan kurssin nimi (avain) sekä kurssin
+    laajuus (arvo). Tilanteessa, jossa joko tiedostoa ei löydy, tai sen rivi
+    on formatoitu väärin / sisältää liian vähän tietoja, funktiosta palataan
+    ja ohjelma sammutetaan. Ottaa vastaan tiedosto-olion jalauttaa sanakirjan,
+    jossa sanakirjan rivit. """
+
     # MUUTTUJIEN ALUSTUKSET (MUUTTUJATYYPEITTÄIN AAKKOSJÄRJESTYKSESSÄ)
 
     # Listat
@@ -71,10 +87,10 @@ def lue_tiedosto_sanakirjaan(tiedosto):
 
     # Merkkijonot
     erotinmerkki = ";"
-    kasiteltava_rivi = ""
     kurssi = ""
     laajuus = ""
     laitos = ""
+    valilyonniton_rivi = ""
 
     # Sanakirjat
     opintotietokanta = {}
@@ -84,15 +100,17 @@ def lue_tiedosto_sanakirjaan(tiedosto):
 
     for rivi in tiedosto:
 
-        kasiteltava_rivi = poista_rivilta_ylimaaraiset_valilyonnit(rivi)
+        valilyonniton_rivi = poista_rivilta_ylimaaraiset_valilyonnit(rivi)
         onko_rivilla_tarpeeksi_tietoja = \
-            onko_rivilla_tarpeeksi_puolipisteita(kasiteltava_rivi)
+            onko_rivilla_tarpeeksi_puolipisteita(valilyonniton_rivi)
 
         if not onko_rivilla_tarpeeksi_tietoja:
             print("Error in file!")
             return
 
-        pilkottu_rivi = pilko_listaksi(kasiteltava_rivi, erotinmerkki)
+        # Arvot on syötetiedostossa eritelty puolipisteellä, joten käytetään
+        # sitä erotinmerkkiparametrina
+        pilkottu_rivi = pilko_listaksi(valilyonniton_rivi, erotinmerkki)
 
         laitos = pilkottu_rivi[0]
         kurssi = pilkottu_rivi[1]
@@ -107,6 +125,11 @@ def lue_tiedosto_sanakirjaan(tiedosto):
 
 
 def komento_tulosta_kaikki(opintotietokanta):
+    """Funktio ajetaan, kun käyttäjä syöttää p-komennon mainissa. Funktio
+    ottaa parametrina opintotietokannan (sanakirja, johon luettu arvot
+    tiedostosta) ja käy sitä läpi. Tulostaa tekstin formatoituna ohjeistuksen
+    mukaisesti. Funktio ei palauta arvoa."""
+
     print()
 
     for laitoksen_nimi, kurssin_tiedot in sorted(opintotietokanta.items()):
@@ -116,7 +139,13 @@ def komento_tulosta_kaikki(opintotietokanta):
 
 
 def komento_tulosta_laitos(komento, opintotietokanta):
-    """"""
+    """Funktio ajetaan, kun käyttäjä syöttää r-komennon mainissa. Komennon
+    mukana käyttäjä syöttää laitoksen, jonka hän haluaa tulostaa. Jos laitos
+    löytyy (= ei puutu), käydään sanakirjaa läpi ja etsitään sieltä haluttu
+    annettu laitos. Kun se löytyy, tulostetaan sen nimi, sekä laitoksen
+    järjestämän kurssit laajuuksineen. Ottaa vastaan käyttäjän syöttämän
+    komennon, sekä opintotietokannan (sanakirja, joka sisältää tiedostosta
+    luetut tiedot), eikä palauta arvoa."""
 
     # MUUTTUJIEN ALUSTUKSET (TYYPEITTÄIN AAKKOSJÄRJESTYKSESSÄ)
 
@@ -140,11 +169,16 @@ def komento_tulosta_laitos(komento, opintotietokanta):
     for laitoksen_nimi, kurssin_tiedot in sorted(opintotietokanta.items()):
         if laitoksen_nimi == komento_laitos:
             print(f"*{laitoksen_nimi}*")
-            for kurssin_nimi, opintopisteet in sorted(kurssin_tiedot.items()):
-                print(f"{kurssin_nimi} : {opintopisteet} cr")
+            for kurssin_nimi, kurssin_laajuus in sorted(kurssin_tiedot.items()):
+                print(f"{kurssin_nimi} : {kurssin_laajuus} cr")
 
 
 def komento_tulosta_opintopisteiden_maara(komento, opintotietokanta):
+    """Funktiota kutsutaan mainista komennolla c. Funktio käy läpi
+    opintotietokantaa, mikäli haluttu laitos löytyy, ja tulostaa halutun
+    kurssin opintopisteet. Mikäli kurssia ei löydy, funktion suorittaminen
+    keskeytetään. Ei palauta arvoa. """
+
     pilkottu_komento = pilko_listaksi(komento)
 
     opintopisteiden_kokonaismaara = 0
