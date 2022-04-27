@@ -4,7 +4,28 @@ Student Id: 150541820
 Name:   Eetu Kuittinen
 Email:  eetu.kuittinen@tuni.fi
 
-TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
+Ohjelman ideana on toimia hakujärjestelmänä yliopistokursseille. Pohjana
+käytetään tekstitiedostoa, joka sisältää valmiiksi ohjelmaan ladattavat (=
+sanakirjaan luettavat) kurssien tiedot.
+
+Käyttäjä syöttää ohjelmaan haluamansa tiedoston. Tämä voi olla tekstitiedon
+lisäksi esimerkiksi CSV-muotoinen yksinkertainen taulukkotiedosto, kunhan se
+noudattaa ohjelman haluamaa formatointia (puolipiste kenttien välillä
+erotinmerkkinä, ei välilyöntejä heti puolipisteen ympärillä). Tiedostoa haetaan
+ohjelman ajokansiosta. Mikäli tiedoston lukeminen onnistuu, se luetaan
+sanakirjaan omassa funktiossaan. Tätä sanakirjaa kutsutaan nimellä
+opintotietokanta. Sen avaimeksi tallennetaan haluttu kurssi ja arvoksi
+sanakirja, jossa on kurssin nimi ja laajuus. Sanakirjalle voidaan tehdä
+erilaisia toimenpiteitä, kuten lisätä sinne kursseja, poistaa niitä, tulostaa
+kaikki kurssit, tulostaa tietyt kurssit yms.
+
+Huomautuksia: Ohjelmassa käytetään käsitteitä "laajuus" ja "opintopistemäärä"
+keskenään vaihtokelpoisesti eli ne tarkoittavat samaa asiaa. Nimeäminen
+perustuu näkemykseeni siitä, kumpi nimitys sopii paremmin mihinkin kontekstiin.
+Tämän lisäksi en ole jokaisen funktion selityksen kohdalla avannut
+opintotietokantaa erikseen, sillä se tarkoittaa aina parametrina samaa
+sanakirjaa, jossa käsiteltävät tiedot ovat.
+
 """
 
 # Globaalit muuttujat
