@@ -466,6 +466,13 @@ def komento_poista_laitos_tai_kurssi(komento, opintotietokanta):
 
 
 def main():
+    """Main huolehtii ohjelman "päävalikon" suorittamisesta sekä ohjelman
+    sulkemisesta silloin, kun funktioista palautetaan paluuarvoja. Päävalikkoa
+    suoritetaan while-loopissa, joka lakkaa käyttäjän syötettyä
+    lopetuskomennon q. Tämän lisäksi main huolehtii virheellisten komentojen
+    virheviestien tulostuksesta."""
+
+
     # MUUTTUJIEN ALUSTUKSET (MUUTTUJATYYPPEITTÄIN AAKKOSJÄRJESTYKSESSÄ)
 
     # Merkkijonot
@@ -514,7 +521,7 @@ def main():
 
         elif komento == LOPETUSKOMENTO:
             print("Ending program.")
-            return
+            break
 
         else:
             print("Invalid command!")
