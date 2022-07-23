@@ -14,7 +14,6 @@ def print_box(leveys, korkeus, merkki):
     for i in range(0, korkeus):
         print(leveys * merkki, sep="", end="")
         print("")
-        i += 1
 
 
 def main():
