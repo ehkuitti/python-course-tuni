@@ -50,8 +50,12 @@ class Fraction:
         return f"{sign}{abs(self.__numerator)}/{abs(self.__denominator)}"
 
     def simplify(self):
-        str_fraction = self.return_string()
-        return str_fraction
+        greatest_common = greatest_common_divisor(self.__numerator,
+                                                  self.__denominator)
+        self.__numerator = self.__numerator // greatest_common
+        self.__denominator = self.__denominator // greatest_common
+        self.return_string()
+
 
 
 def greatest_common_divisor(a, b):
