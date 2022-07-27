@@ -88,6 +88,11 @@ class Fraction:
 
         return Fraction(expanded_numerator_sum, expanded_denominator_sum)
 
+    def __lt__(self, other):
+        self_result = self.__numerator / self.__denominator
+        other_result = other.__numerator / other.__denominator
+        return self_result < other_result
+
 
 def greatest_common_divisor(a, b):
     """
