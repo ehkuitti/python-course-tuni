@@ -56,6 +56,26 @@ class Fraction:
         self.__denominator = self.__denominator // greatest_common
         self.return_string()
 
+    # FI: Käänteisluku
+    def reciprocal(self):
+        return Fraction(self.__denominator, self.__numerator)
+
+    # FI: Vastaluku
+    def complement(self):
+        return Fraction(-self.__numerator, self.__denominator)
+
+    def multiply(self, other):
+        new_numerator = self.__numerator * other.__numerator
+        new_denominator = self.__denominator * other.__denominator
+        return Fraction(new_numerator, new_denominator)
+
+    def divide(self, other):
+        self_recip = self.reciprocal()
+        other_recip = other.reciprocal()
+        new_numerator = self.__numerator * other_recip.__denominator
+        new_denominator = other.__numerator * self_recip.__denominator
+        return Fraction(new_numerator, new_denominator)
+
 
 def greatest_common_divisor(a, b):
     """
