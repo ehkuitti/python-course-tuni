@@ -70,12 +70,10 @@ class Fraction:
         return Fraction(new_numerator, new_denominator)
 
     def divide(self, other):
-        self_recip = self.reciprocal()
-        other_recip = other.reciprocal()
-        new_numerator = self.__numerator * other_recip.__denominator
-        new_denominator = other.__numerator * self_recip.__denominator
+        new_numerator = self.__numerator * other.__denominator
+        new_denominator = other.__numerator * self.__denominator
         return Fraction(new_numerator, new_denominator)
-
+    
 
 def greatest_common_divisor(a, b):
     """
