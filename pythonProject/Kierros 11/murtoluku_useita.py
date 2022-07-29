@@ -76,17 +76,16 @@ class Fraction:
 
     def add(self, other):
         self_expanded_denominator = self.__denominator * other.__denominator
-        self_expanded_numerator = self.__numerator * other.__denominator
+        self_numerator_sum = self.__numerator * other.__denominator + \
+                             other.__numerator * self.__denominator
 
-        other_expanded_denominator = other.__denominator * self.__denominator
-        other_expanded_numerator = other.__numerator * self.__denominator
+        # other_expanded_denominator = other.__denominator * self.__denominator
+        # other_expanded_numerator = other.__numerator * self.__denominator
 
-        expanded_denominator_sum = self_expanded_denominator + \
-                                   other_expanded_denominator
-        expanded_numerator_sum = self_expanded_numerator + \
-                                 other_expanded_numerator
+        return Fraction(self_numerator_sum, self_expanded_denominator)
 
-        return Fraction(expanded_numerator_sum, expanded_denominator_sum)
+    def deduct(self, other):
+        
 
 
 def greatest_common_divisor(a, b):
