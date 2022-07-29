@@ -85,7 +85,10 @@ class Fraction:
         return Fraction(self_numerator_sum, self_expanded_denominator)
 
     def deduct(self, other):
-        
+        self_expanded_denominator = self.__denominator * other.__denominator
+        self_numerator_deduction = (self.__numerator * other.__denominator) - \
+                                   other.__numerator * self.__denominator
+        return Fraction(self_numerator_deduction, self_expanded_denominator)
 
 
 def greatest_common_divisor(a, b):
