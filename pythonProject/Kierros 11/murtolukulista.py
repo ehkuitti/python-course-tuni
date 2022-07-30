@@ -77,7 +77,7 @@ class Fraction:
     def add(self, other):
         self_expanded_denominator = self.__denominator * other.__denominator
         self_numerator_sum = self.__numerator * other.__denominator + \
-                             other.__numerator * self.__denominator
+                            other.__numerator * self.__denominator
 
         # other_expanded_denominator = other.__denominator * self.__denominator
         # other_expanded_numerator = other.__numerator * self.__denominator
@@ -89,6 +89,10 @@ class Fraction:
         self_numerator_deduction = (self.__numerator * other.__denominator) - \
                                    other.__numerator * self.__denominator
         return Fraction(self_numerator_deduction, self_expanded_denominator)
+
+    def __str__(self):
+        str_return_value = self.return_string()
+        return str_return_value
 
 
 def greatest_common_divisor(a, b):
@@ -106,8 +110,34 @@ def greatest_common_divisor(a, b):
 
 
 def main():
-    pass
+
+    print("Enter fractions in the format integer/integer.")
+    print("One fraction per line. Stop by entering an empty line.")
+
+    i = 0
+    oma_syote = ""
+    splitattu_syote = []
+    lista_murtoluvuista = []
+
+    while True:
+        oma_syote = input()
+        stripattu_syote = oma_syote.strip()
+        if stripattu_syote == "":
+            break
+
+        splitattu_syote = oma_syote.split("/")
+
+        osoittaja = int(splitattu_syote[0])
+        nimittaja = int(splitattu_syote[1])
+
+        murtoluku = Fraction(osoittaja, nimittaja)
+        lista_murtoluvuista.append(murtoluku)
+
+        i += 1
+
+    for alkio in lista_murtoluvuista:
+        print(alkio)
 
 
-if __name__ == __main__:
+if __name__ == "__main__":
     main()
