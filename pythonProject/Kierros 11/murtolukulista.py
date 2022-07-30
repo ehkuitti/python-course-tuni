@@ -95,7 +95,7 @@ def greatest_common_divisor(a, b):
     """
     Euclidean algorithm. Returns the greatest common
     divisor (suurin yhteinen tekijä).  When both the numerator
-    and the denominator is divided by their greatest common divisor,
+    and the denominator are divided by their greatest common divisor,
     the result will be the most reduced version of the fraction in question.
     """
 
@@ -103,3 +103,11 @@ def greatest_common_divisor(a, b):
         a, b = b, a % b
 
     return a
+
+
+def main():
+    pass
+
+
+if __name__ == __main__:
+    main()
