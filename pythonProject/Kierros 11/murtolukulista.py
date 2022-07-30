@@ -135,8 +135,9 @@ def main():
 
         i += 1
 
+    print("The given fraction in their simplified form:")
     for alkio in lista_murtoluvuista:
-        print(alkio)
+        print(alkio, "=", )
 
 
 if __name__ == "__main__":
