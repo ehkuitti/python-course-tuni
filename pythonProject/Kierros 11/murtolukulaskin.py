@@ -116,18 +116,92 @@ def command_quit():
     return
 
 
-def command_add():
+def command_add(frac_dict):
+
+    # Integers
+    numerator = 0
+    denominator = 0
+
+    # Lists
+    my_stripped_input = []
+
+    # Strings
+    frac_name = ""
+    frac_str = ""
+    my_input = ""
+
     print("Enter a fraction in the form integer/integer: ")
-    input()
+    my_input = input()
+
+    my_splitted_input = my_input.split("/")
+    numerator = int(my_splitted_input[0])
+    denominator = int(my_splitted_input[1])
+
+    frac = Fraction(numerator, denominator)
+    frac_str = frac.return_string()
+
+    print("Enter a name: ")
+    frac_name = input()
+
+    frac_dict[frac_name] = frac_str
+
+    # TODO: Toteuta lisättävän murtoluvun nimeäminen
 
 
 def command_unknown_command():
     print("Unknown command!")
 
 
+def command_list(frac_dict):
+    for key, payload in frac_dict.items():
+        print(f"{key} = {payload}")
+
+
+def command_times(frac_dict):
+
+    # Strings
+    first_operand = ""
+    second_operand = ""
+    simplified_str = ""
+    operand_product = ""
+    
+    # Integers
+
+    print("1st operand: ")
+    first_operand = input()
+
+    print("2nd operand: ")
+    second_operand = input()
+
+    if (first_operand in frac_dict) and (second_operand in frac_dict):
+        
+        # String-muodossa supistamatta
+        operand_product = frac_dict[first_operand] * frac_dict[second_operand]
+        
+        split_result = operand_product.split()
+        numer = int(split_result[0])
+        denom = int(split_result[1])
+        
+        simpl_frac = Fraction(numer, denom)
+        simplified_str = simpl_frac.simplify()
+        
+        print(f"{first_operand} * {second_operand} = {operand_product}")
+        print(f"simplified {simplified_str}")
+        
+
+def command_file(frac_dict):
+    pass
+
+
 def main():
 
+    # Booleans
     is_input_quit = False
+
+    # Dictionaries
+    frac_dict = {}
+
+    # Strings
     my_input = ""
 
     while not is_input_quit:
@@ -141,7 +215,13 @@ def main():
             is_input_quit = True
 
         elif my_stripped_input == "add":
-            command_add()
+            command_add(frac_dict)
+
+        elif my_stripped_input == "list":
+            command_list(frac_dict)
+
+        elif my_stripped_input == "*":
+            command_times(frac_dict)
 
         else:
             command_unknown_command()
