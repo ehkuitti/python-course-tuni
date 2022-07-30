@@ -54,7 +54,8 @@ class Fraction:
                                                   self.__denominator)
         self.__numerator = self.__numerator // greatest_common
         self.__denominator = self.__denominator // greatest_common
-        self.return_string()
+        clause = self.return_string()
+        return clause
 
     # FI: Käänteisluku
     def reciprocal(self):
@@ -91,8 +92,9 @@ class Fraction:
         return Fraction(self_numerator_deduction, self_expanded_denominator)
 
     def __str__(self):
-        str_return_value = self.return_string()
-        return str_return_value
+        str_return_clause = self.return_string()
+        str_return_clause_simplified = self.simplify()
+        return f"{str_return_clause} = {str_return_clause_simplified}"
 
 
 def greatest_common_divisor(a, b):
@@ -135,9 +137,9 @@ def main():
 
         i += 1
 
-    print("The given fraction in their simplified form:")
+    print("The given fractions in their simplified form:")
     for alkio in lista_murtoluvuista:
-        print(alkio, "=", )
+        print(alkio)
 
 
 if __name__ == "__main__":
