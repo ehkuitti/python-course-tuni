@@ -172,36 +172,68 @@ def command_times(frac_dict):
 
     # Strings
     first_operand = ""
+    first_fraction = ""
+    second_fraction = ""
     second_operand = ""
     simplified_str = ""
     operand_product = ""
-    
+    multi_str = ""
+
     # Integers
+    first_numerator = 0
+    first_denominator = 0
+    second_numerator = 0
+    second_denominator = 0
+
+    # Lists
+    first_fraction_split = []
 
     first_operand = input("1st operand: ")
     second_operand = input("2nd operand: ")
 
-    if (first_operand in frac_dict) and (second_operand in frac_dict):
-        
-        # String-muodossa supistamatta
-        operand_product = float(frac_dict[first_operand]) * float(frac_dict[
-            second_operand])
-        
-        split_result = operand_product.split()
-        numer = int(split_result[0])
-        denom = int(split_result[1])
-        
-        simpl_frac = Fraction(numer, denom)
-        simplified_str = simpl_frac.simplify()
-        
-        print(f"{first_operand} * {second_operand} = {operand_product}")
-        print(f"simplified {simplified_str}")
+    if first_operand in frac_dict:
+        for key, first_operand_payload in frac_dict.items():
+            if key == first_operand:
+                first_fraction = first_operand_payload
+    else:
+        print(f"Name {first_operand} was not found")
+        return
+
+    first_fraction_split = first_fraction.split("/")
+    first_numerator = int(first_fraction_split[0])
+    first_denominator = int(first_fraction_split[1])
+
+    if second_operand in frac_dict:
+        for key, second_operand_payload in frac_dict.items():
+            if key == second_operand:
+                second_fraction = second_operand_payload
+
+    else:
+        print(f"Name {second_operand} was not found")
+        return
+
+    second_fraction_split = second_fraction.split("/")
+    second_numerator = int(second_fraction_split[0])
+    second_denominator = int(second_fraction_split[1])
+
+    first_frac = Fraction(first_numerator, first_denominator)
+    second_frac = Fraction(second_numerator, second_denominator)
+
+    multiplied_fraction = first_frac.multiply(second_frac)
+    multi_str = multiplied_fraction.return_string()
+
+    print(f"{first_numerator}/{first_denominator} * {second_numerator}/"
+          f"{second_denominator} ="
+          f" {multi_str}")
+
+    simplified_str = multiplied_fraction.simplify()
+
+    print(f"simplified {simplified_str}")
         
 
 def command_file(frac_dict):
     """TBA: This function reads a file and its contents and copies them over
     to a dictionary in the desired format."""
-    pass
 
 
 def command_print(frac_dict):
