@@ -112,11 +112,18 @@ def greatest_common_divisor(a, b):
 
 
 def command_quit():
+    """This command is run when the user inputs the word quit. It prints the
+    decided message and returns to the main program.  """
     print("Bye bye!")
     return
 
 
 def command_add(frac_dict):
+    """
+    The user inputs a fraction to be added to a dictionary. Then the user
+    chooses a name for the fraction. The fraction gets added to a dictionary
+    as a pair. The key will be the name and the payload will be the fraction.
+    """
 
     # Integers
     numerator = 0
@@ -130,8 +137,7 @@ def command_add(frac_dict):
     frac_str = ""
     my_input = ""
 
-    print("Enter a fraction in the form integer/integer: ")
-    my_input = input()
+    my_input = input("Enter a fraction in the form integer/integer: ")
 
     my_splitted_input = my_input.split("/")
     numerator = int(my_splitted_input[0])
@@ -140,8 +146,7 @@ def command_add(frac_dict):
     frac = Fraction(numerator, denominator)
     frac_str = frac.return_string()
 
-    print("Enter a name: ")
-    frac_name = input()
+    frac_name = input("Enter a name: ")
 
     frac_dict[frac_name] = frac_str
 
@@ -149,15 +154,21 @@ def command_add(frac_dict):
 
 
 def command_unknown_command():
+    """This function prints an error message when the user inputs a command
+    which doesn't exist. """
     print("Unknown command!")
 
 
 def command_list(frac_dict):
+    """This command acts essentially as a print command. It iterates over a
+    dictionary and prints its contents in the desired format."""
     for key, payload in frac_dict.items():
         print(f"{key} = {payload}")
 
 
 def command_times(frac_dict):
+    """This command multiplies two values by input. The program seeks for
+    these values in the dictionary and does the calculation if found."""
 
     # Strings
     first_operand = ""
@@ -167,16 +178,14 @@ def command_times(frac_dict):
     
     # Integers
 
-    print("1st operand: ")
-    first_operand = input()
-
-    print("2nd operand: ")
-    second_operand = input()
+    first_operand = input("1st operand: ")
+    second_operand = input("2nd operand: ")
 
     if (first_operand in frac_dict) and (second_operand in frac_dict):
         
         # String-muodossa supistamatta
-        operand_product = frac_dict[first_operand] * frac_dict[second_operand]
+        operand_product = float(frac_dict[first_operand]) * float(frac_dict[
+            second_operand])
         
         split_result = operand_product.split()
         numer = int(split_result[0])
@@ -190,7 +199,21 @@ def command_times(frac_dict):
         
 
 def command_file(frac_dict):
+    """TBA: This function reads a file and its contents and copies them over
+    to a dictionary in the desired format."""
     pass
+
+
+def command_print(frac_dict):
+
+    frac_name = ""
+
+    frac_name = input("Enter a name: ")
+
+    if frac_name in frac_dict:
+        for key, payload in frac_dict.items():
+            if key == frac_name:
+                print(f"{key} = {payload}")
 
 
 def main():
@@ -219,6 +242,9 @@ def main():
 
         elif my_stripped_input == "list":
             command_list(frac_dict)
+
+        elif my_stripped_input == "print":
+            command_print(frac_dict)
 
         elif my_stripped_input == "*":
             command_times(frac_dict)
