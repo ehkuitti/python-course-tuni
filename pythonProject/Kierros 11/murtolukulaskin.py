@@ -162,7 +162,7 @@ def command_unknown_command():
 def command_list(frac_dict):
     """This command acts essentially as a print command. It iterates over a
     dictionary and prints its contents in the desired format."""
-    for key, payload in frac_dict.items():
+    for key, payload in sorted(frac_dict.items()):
         print(f"{key} = {payload}")
 
 
@@ -189,8 +189,6 @@ def command_times(frac_dict):
     first_fraction_split = []
 
     first_operand = input("1st operand: ")
-    second_operand = input("2nd operand: ")
-
     if first_operand in frac_dict:
         for key, first_operand_payload in frac_dict.items():
             if key == first_operand:
@@ -203,6 +201,7 @@ def command_times(frac_dict):
     first_numerator = int(first_fraction_split[0])
     first_denominator = int(first_fraction_split[1])
 
+    second_operand = input("2nd operand: ")
     if second_operand in frac_dict:
         for key, second_operand_payload in frac_dict.items():
             if key == second_operand:
@@ -235,17 +234,53 @@ def command_file(frac_dict):
     """TBA: This function reads a file and its contents and copies them over
     to a dictionary in the desired format."""
 
+    fraction_name = ""
+    filename = ""
+
+    split_row = []
+    split_fraction = []
+
+    filename = input("Enter the name of the file: ")
+
+    try:
+        my_file = open(filename, "r")
+    except FileNotFoundError:
+        print("Error: the file cannot be read.")
+        return
+
+    for line in my_file:
+        try:
+            split_row = line.split("=")
+            fraction_name = split_row[0]
+            original_fraction = split_row[1]
+        except IndexError:
+            print("Error: the file cannot be read.")
+            return
+
+        try:
+            split_fraction = original_fraction.split("/")
+            numerator = int(split_fraction[0])
+            denominator = int(split_fraction[1])
+            frac_obj = Fraction(numerator, denominator)
+            frac_dict[fraction_name] = frac_obj
+        except IndexError:
+            print("Error: the file cannot be read.")
+            return
+
 
 def command_print(frac_dict):
-
+    """The function goes through a desired file and adds all rows as entries
+    to the fraction dictionary."""
     frac_name = ""
 
     frac_name = input("Enter a name: ")
 
     if frac_name in frac_dict:
-        for key, payload in frac_dict.items():
+        for key, payload in sorted(frac_dict.items()):
             if key == frac_name:
                 print(f"{key} = {payload}")
+    else:
+        print(f"Name {frac_name} was not found")
 
 
 def main():
@@ -280,6 +315,9 @@ def main():
 
         elif my_stripped_input == "*":
             command_times(frac_dict)
+
+        elif my_stripped_input == "file":
+            command_file(frac_dict)
 
         else:
             command_unknown_command()
