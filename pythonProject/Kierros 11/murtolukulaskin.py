@@ -262,7 +262,8 @@ def command_file(frac_dict):
             numerator = int(split_fraction[0])
             denominator = int(split_fraction[1])
             frac_obj = Fraction(numerator, denominator)
-            frac_dict[fraction_name] = frac_obj
+            frac_clause = frac_obj.return_string()
+            frac_dict[fraction_name] = frac_clause
         except IndexError:
             print("Error: the file cannot be read.")
             return
