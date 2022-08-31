@@ -8,7 +8,10 @@ ika = int(input())
 print("Anna matkan alkamisaika tasatunteina:")
 kellonaika = int(input())
 
-if ika <= 65 and 9 <= kellonaika <= 14:
+if kellonaika == 24:
+    kellonaika = 0
+
+if ika >= 65 and 9 <= kellonaika <= 14:
     hinta = 1.20
 
 elif ika <= 6:

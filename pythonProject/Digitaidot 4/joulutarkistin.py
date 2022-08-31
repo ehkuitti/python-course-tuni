@@ -1,4 +1,4 @@
-print("Anna kuukausi:")
+xprint("Anna kuukausi:")
 kuukausi = int(input())
 
 print("Anna päivä:")
