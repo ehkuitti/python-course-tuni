@@ -14,8 +14,6 @@ def main():
     while True:
         tulos = i * numero
         print(i, "*", numero, "=", tulos)
-        if i >= 10:
-            break
         if tulos > 100:
             break
         else:
