@@ -10,7 +10,7 @@ True.
 """
 
 
-def are_all_members_same(lista=[]):
+def are_all_members_same(lista=[1, 3, 2]):
     """Tutkii, ovatko kaikki lista-alkiot samoja vertaamalla alkiota i
     indeksin 0 alkioon."""
 
