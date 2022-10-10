@@ -69,20 +69,21 @@ def main():
             # print("Sanakirjan sisältö: ", english_spanish)
             print("The text, translated by the dictionary: ")
             i = 0
-            is_input_traversion_over = False
-            while not is_input_traversion_over:
-                for avain in sorted(english_spanish):
+            is_input_traversion_in_progress = True
+            while is_input_traversion_in_progress:
+                for avain in english_spanish:
                     if i > split_lenght-1:
                         break
                     elif split_text_to_spanish[i] in english_spanish:
-                        print(english_spanish.get(split_text_to_spanish[i]), " ", sep="", end="")
+                        print(english_spanish.get(split_text_to_spanish[i]),
+                              " ", end="")
                     else:
                         print(split_text_to_spanish[i], " ", sep="", end="")
                     i += 1
-                if i < len(split_text_to_spanish):
+                if i < split_lenght:
                     continue
                 else:
-                    is_input_traversion_over = True
+                    is_input_traversion_in_progress = False
                     # print(avain, english_spanish[avain])
                     # -> tulostaa ekalta "riviltä" >> home casa
             print("")

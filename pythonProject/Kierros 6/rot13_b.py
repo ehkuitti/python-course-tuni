@@ -20,7 +20,6 @@ def read_message():
         if inputti == "" or inputti == " ":
             return msg
         msg.append(inputti)
-    # return msg
 
 
 def main():
