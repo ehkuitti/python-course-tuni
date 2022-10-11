@@ -98,6 +98,10 @@ def laske_mediaani(korkeusvaihtelut):
     return mediaani
 
 
+def laske_keskihajonta(korkeusvaihtelut):
+    pass
+
+
 def main():
     # MUUTTUJIEN ALUSTUKSET MUUTTUJATYYPEITTÄIN AAKKOSJÄRJESTYKSESSÄ
 
