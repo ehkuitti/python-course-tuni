@@ -8,20 +8,39 @@ TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
 """
 
 
-def minimiarvo(korkeusvaihtelut):
+def laske_minimiarvo(korkeusvaihtelut):
     """Funktio ottaa parametrina vastaan listan, jossa korkeusvaihtelut ovat.
     Funktio min etsii sieltä pienimmän arvon, jonka jälkeen funktio palauttaa
     tämän arvon."""
+
     minimi_korkeusvaihtelu = min(korkeusvaihtelut)
     return minimi_korkeusvaihtelu
 
 
-def maksimiarvo(korkeusvaihtelut):
+def laske_maksimiarvo(korkeusvaihtelut):
     """Funktio ottaa parametrina vastaan listan, jossa korkeusvaihtelut ovat.
     Funktio max etsii sieltä suurimman arvon, jonka jälkeen funktio palauttaa
     tämän arvon."""
+
     maksimi_korkeusvaihtelu = max(korkeusvaihtelut)
     return maksimi_korkeusvaihtelu
+
+
+def laske_keskiarvo(korkeusvaihtelut):
+    """Funktio ottaa parametrinä listan, jossa käsiteltävät arvot ovat, sekä
+    Keskiarvo lasketaan jakamalla alkioiden summa niiden määrällä.
+    Palauttaa keskiarvon mainille. """
+
+    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
+    keskiarvo = 0
+    lista_alkioiden_summa = 0
+    korkeusvaihtelulistan_pituus = len(korkeusvaihtelut)
+
+    for indeksi in range(0, korkeusvaihtelulistan_pituus, 1):
+        lista_alkioiden_summa += korkeusvaihtelut[indeksi]
+
+    keskiarvo = lista_alkioiden_summa / korkeusvaihtelulistan_pituus
+    return keskiarvo
 
 
 def main():
@@ -34,8 +53,9 @@ def main():
     korkeusvaihtelut = []
 
     # Liukuluvut
-    maksimi = 0.0
-    minimi = 0.0
+    keskiarvo = 0.0
+    maksimiarvo = 0.0
+    minimiarvo = 0.0
     syotetty_arvo = 0.0
 
     # Merkkijonot
@@ -67,15 +87,19 @@ def main():
             syotetty_arvo = float(stripattu_str_syotetty_arvo)
             korkeusvaihtelut.append(syotetty_arvo)
 
+        i += 1
+
     # Tähän tultaessa arvojen syöttäminen on päättynyt, joten voidaan
     # tulostaa kaikki halutut tulokset. Tämä tapahtuu ottamaan talteen
     # kutankin arvoa vastaavan funktion paluuarvot ja tulostamalla ne.
 
-    minimi = minimiarvo(korkeusvaihtelut)
-    maksimi = maksimiarvo(korkeusvaihtelut)
+    minimiarvo = laske_minimiarvo(korkeusvaihtelut)
+    maksimiarvo = laske_maksimiarvo(korkeusvaihtelut)
+    keskiarvo = laske_keskiarvo(korkeusvaihtelut)
 
-    print(f"Minimum: {minimi:.1f}")
-    print(f"Maksimi: {maksimi:.1f}")
+    print(f"Minimum: {minimiarvo:.2f}")
+    print(f"Maximum: {maksimiarvo:.2f}")
+    print(f"Mean: {keskiarvo:.2f}")
 
 
 if __name__ == "__main__":
