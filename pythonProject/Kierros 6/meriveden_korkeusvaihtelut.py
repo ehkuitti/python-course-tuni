@@ -28,8 +28,8 @@ def laske_maksimiarvo(korkeusvaihtelut):
 
 def laske_keskiarvo(korkeusvaihtelut):
     """Funktio ottaa parametrinä listan, jossa käsiteltävät arvot ovat, sekä
-    Keskiarvo lasketaan jakamalla alkioiden summa niiden määrällä.
-    Palauttaa keskiarvon mainille. """
+    Keskiarvo lasketaan jakamalla alkioiden summa niiden määrällä, joka on
+    tässä tapauksessa listan pituus. Palauttaa lasketun keskiarvon. """
 
     # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
     keskiarvo = 0
@@ -41,6 +41,61 @@ def laske_keskiarvo(korkeusvaihtelut):
 
     keskiarvo = lista_alkioiden_summa / korkeusvaihtelulistan_pituus
     return keskiarvo
+
+
+def onko_arvo_pariton(arvo):
+    """Funktion tarkoituksena on tarkistaa, onko annettu arvo pariton. Tämä
+    tehdään jakamalla arvo kahdella ja tutkimalla jääkö jakojäännöstä, ts.
+    meneekö jako tasan. Mikäli jako ei mene tasan, palauttaa Truen, jolloin lu-
+    ku on pariton. Muussa tapauksessa polauttaa Falsen, jolloin luku
+    on parillinen. """
+
+    return arvo % 2 > 0
+
+
+def laske_mediaani(korkeusvaihtelut):
+    """Funktio laskee mediaanin annetuista arvoista. Ottaa parametreina vastaan
+        paivalistan (jossa arvot tallessa) sekä päivien määrän (kokonaisluku).
+        Funktiossa käytetään listan käsittelyyn nousevaan järjestykseen
+        sortattua listan kopiota, jotta mediaanilaskut menevät oikein. Tähän
+        EI käytetä .sort():tiam, jotta voidaan laskea keskiarvon ero
+        mediaanin myöhemmin ohjelmassa. Palauttaa lasketun mediaanin.
+
+        Mediaanin laskeminen:
+        - Jos alkioita on pariton määrä, mediaani on
+          paivat_pienimmasta_suurimpaan listan keskimmäinen alkio
+        - Jos parillinen, se on kahden keskimmäisen arvon keskiarvo.
+        """
+
+    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
+    keskimmaisten_keskiarvo = 0
+    korkeusvaihteluiden_maara = len(korkeusvaihtelut)
+    mediaani = 0
+    korkeusvaihtelut_pienimmasta_suurimpaan = sorted(korkeusvaihtelut)
+    parillinen_keskimmainen_arvo_1 = 0
+    parillinen_keskimmainen_arvo_2 = 0
+    pariton_keskimmainen_arvo = 0
+
+    if onko_arvo_pariton(korkeusvaihteluiden_maara):
+
+        # Keskimmainen sijaitsee taulukon puolivälissä
+        pariton_keskimmainen_arvo = (korkeusvaihteluiden_maara // 2)
+        mediaani = \
+            korkeusvaihtelut_pienimmasta_suurimpaan[pariton_keskimmainen_arvo]
+
+    else:
+
+        # Otetaan muuttujiin talteen kaksi keskimmäistä arvoa sekä niiden
+        # keskiarvo
+        parillinen_keskimmainen_arvo_1 = (korkeusvaihteluiden_maara // 2) - 1
+        parillinen_keskimmainen_arvo_2 = (korkeusvaihteluiden_maara // 2)
+        keskimmaisten_keskiarvo = (korkeusvaihtelut_pienimmasta_suurimpaan
+                                   [parillinen_keskimmainen_arvo_1] +
+                                   korkeusvaihtelut_pienimmasta_suurimpaan
+                                   [parillinen_keskimmainen_arvo_2]) / 2
+        mediaani = keskimmaisten_keskiarvo
+
+    return mediaani
 
 
 def main():
@@ -55,6 +110,7 @@ def main():
     # Liukuluvut
     keskiarvo = 0.0
     maksimiarvo = 0.0
+    mediaani = 0.0
     minimiarvo = 0.0
     syotetty_arvo = 0.0
 
@@ -95,11 +151,13 @@ def main():
 
     minimiarvo = laske_minimiarvo(korkeusvaihtelut)
     maksimiarvo = laske_maksimiarvo(korkeusvaihtelut)
+    mediaani = laske_mediaani(korkeusvaihtelut)
     keskiarvo = laske_keskiarvo(korkeusvaihtelut)
 
-    print(f"Minimum: {minimiarvo:.2f}")
-    print(f"Maximum: {maksimiarvo:.2f}")
-    print(f"Mean: {keskiarvo:.2f}")
+    print(f"Minimum: {minimiarvo:.2f} cm")
+    print(f"Maximum: {maksimiarvo:.2f} cm")
+    print(f"Median: {mediaani:.2f} cm")
+    print(f"Mean: {keskiarvo:.2f} cm")
 
 
 if __name__ == "__main__":
