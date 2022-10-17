@@ -28,6 +28,7 @@ def main():
 
     except OSError:
         print("There was an error in reading the file.")
+        return 1
 
     i = 1
     for file_line in file:
