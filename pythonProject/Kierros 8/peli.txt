@@ -1,5 +1,5 @@
 essi 5
-essi seksi
+essi 3
 pietari 9
 essi 2
 pietari 10
