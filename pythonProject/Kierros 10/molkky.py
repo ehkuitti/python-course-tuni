@@ -29,6 +29,8 @@ class Player:
         amount_of_values_greater_than_one = 0
         total_amount_of_hits = len(self.__hits)
 
+        # [0, 1, 0, 1]
+        #     1
         for value in self.__hits:
             if value >= 1:
                 amount_of_values_greater_than_one += 1

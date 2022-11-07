@@ -4,26 +4,38 @@ Student Id: 150541820
 Name:   Eetu Kuittinen
 Email:  eetu.kuittinen@tuni.fi
 
-TÄHÄN TULEE KUVAUS SIITÄ, MITÄ KOODITIEDOSTON OLISI TARKOITUS TEHDÄ.
+Ohjelmassa mitataan meriveden korkeusvaihteluita. Korkeusvaihtelut on
+ohjelmassa luotava lista, johon käyttäjä syöttää yksittäisiä
+korkeusvaihteluita. Tätä listaa käytetään sitten erilaisten arvojen,
+kuten minimiarvon, maksimiarvon ja keskiarvon laskemiseen.
+
+Jokainen oma toimintokokonaisuutensa on ohjelmassa jaettu omiin funktioihin
+luettavuuden lisäämiseksi. Main-funktio ohjaa ohjelman etenemistä ja kutsuu
+yksittäisiä funktioita, jotka voivat kutsua muita funktioita laskeakseen
+arvoja. Ohjelma on toteutettu käyttäen Pythonin valmisfunktioita, pois lukien
+neliöjuuren (sqrt) funtkio, joka tuodaan Pythonin matikkakirjastosta.
+Jokainen ohjelman muuttujan arvo on alustettu muuttujatyypille sopivalla
+alkuarvolla. Tämän lisöksi ohjelmassa käytetään lippumuuttujia (engl.
+boolean) loop-rakenteissa pyörittävänä ehtona.
 """
+
+from math import sqrt
 
 
 def laske_minimiarvo(korkeusvaihtelut):
     """Funktio ottaa parametrina vastaan listan, jossa korkeusvaihtelut ovat.
-    Funktio min etsii sieltä pienimmän arvon, jonka jälkeen funktio palauttaa
-    tämän arvon."""
+    Pythonin valmisfunktio min etsii sieltä pienimmän arvon, jonka jälkeen
+    funktio palauttaa tämän arvon."""
 
-    minimi_korkeusvaihtelu = min(korkeusvaihtelut)
-    return minimi_korkeusvaihtelu
+    return min(korkeusvaihtelut)
 
 
 def laske_maksimiarvo(korkeusvaihtelut):
     """Funktio ottaa parametrina vastaan listan, jossa korkeusvaihtelut ovat.
-    Funktio max etsii sieltä suurimman arvon, jonka jälkeen funktio palauttaa
-    tämän arvon."""
+    Pythonin valmisfunktio max etsii sieltä suurimman arvon, jonka jälkeen
+    funktio palauttaa tämän arvon."""
 
-    maksimi_korkeusvaihtelu = max(korkeusvaihtelut)
-    return maksimi_korkeusvaihtelu
+    return max(korkeusvaihtelut)
 
 
 def laske_keskiarvo(korkeusvaihtelut):
@@ -31,10 +43,14 @@ def laske_keskiarvo(korkeusvaihtelut):
     Keskiarvo lasketaan jakamalla alkioiden summa niiden määrällä, joka on
     tässä tapauksessa listan pituus. Palauttaa lasketun keskiarvon. """
 
-    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
-    keskiarvo = 0
-    lista_alkioiden_summa = 0
+    # MUUTTUJIEN ALUSTUKSET (MUUTTUJATYYPPEINEEN AAKKOSJÄRJESTYKSESSÄ)
+
+    # Kokonaisluvut
     korkeusvaihtelulistan_pituus = len(korkeusvaihtelut)
+
+    # Liukuluvut
+    keskiarvo = 0.0
+    lista_alkioiden_summa = 0.0
 
     for indeksi in range(0, korkeusvaihtelulistan_pituus, 1):
         lista_alkioiden_summa += korkeusvaihtelut[indeksi]
@@ -44,37 +60,44 @@ def laske_keskiarvo(korkeusvaihtelut):
 
 
 def onko_arvo_pariton(arvo):
-    """Funktion tarkoituksena on tarkistaa, onko annettu arvo pariton. Tämä
-    tehdään jakamalla arvo kahdella ja tutkimalla jääkö jakojäännöstä, ts.
-    meneekö jako tasan. Mikäli jako ei mene tasan, palauttaa Truen, jolloin lu-
-    ku on pariton. Muussa tapauksessa polauttaa Falsen, jolloin luku
-    on parillinen. """
+    """Funktion tarkoituksena on tarkistaa, onko parametrina annettu arvo
+    pariton. Tämä tehdään jakamalla arvo kahdella ja tutkimalla jääkö
+    jakojäännöstä, ts. meneekö jako tasan. Mikäli jako ei mene tasan,
+    palauttaa Truen, jolloin luku on pariton. Muussa tapauksessa polauttaa
+    Falsen, jolloin luku on parillinen. """
 
     return arvo % 2 > 0
 
 
 def laske_mediaani(korkeusvaihtelut):
     """Funktio laskee mediaanin annetuista arvoista. Ottaa parametreina vastaan
-        paivalistan (jossa arvot tallessa) sekä päivien määrän (kokonaisluku).
+        korkeusvaihtelulistan (jossa arvot tallessa) sekä päivien määrän (
+        kokonaisluku).
         Funktiossa käytetään listan käsittelyyn nousevaan järjestykseen
         sortattua listan kopiota, jotta mediaanilaskut menevät oikein. Tähän
         EI käytetä .sort():tiam, jotta voidaan laskea keskiarvon ero
-        mediaanin myöhemmin ohjelmassa. Palauttaa lasketun mediaanin.
+        mediaaniin myöhemmin ohjelmassa. Palauttaa lasketun mediaanin.
 
         Mediaanin laskeminen:
         - Jos alkioita on pariton määrä, mediaani on
-          paivat_pienimmasta_suurimpaan listan keskimmäinen alkio
+          korkeusvaihtelut_pienimmasta_suurimpaan listan keskimmäinen alkio
         - Jos parillinen, se on kahden keskimmäisen arvon keskiarvo.
         """
 
-    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ)
-    keskimmaisten_keskiarvo = 0
+    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ MUUTTUJATYYPEITTÄIN)
+
+    # Kokonaisluvut
     korkeusvaihteluiden_maara = len(korkeusvaihtelut)
-    mediaani = 0
+
+    # Listat
     korkeusvaihtelut_pienimmasta_suurimpaan = sorted(korkeusvaihtelut)
-    parillinen_keskimmainen_arvo_1 = 0
-    parillinen_keskimmainen_arvo_2 = 0
-    pariton_keskimmainen_arvo = 0
+
+    # Liukuluvut
+    keskimmaisten_keskiarvo = 0.0
+    mediaani = 0.0
+    parillinen_keskimmainen_arvo_1 = 0.0
+    parillinen_keskimmainen_arvo_2 = 0.0
+    pariton_keskimmainen_arvo = 0.0
 
     if onko_arvo_pariton(korkeusvaihteluiden_maara):
 
@@ -98,8 +121,49 @@ def laske_mediaani(korkeusvaihtelut):
     return mediaani
 
 
+def laske_varianssi(korkeusvaihtelut):
+    """
+    Funktio ottaa vastaan listan, jossa on korkeusvaihtelut. Laskee
+    varianssin varianssin matemaattisella kaavalla. Palauttaa lasketun
+    varianssin kutsujalle (tässä ohjelmassa laske_keskihajonta()),
+    joka hyödyntää varianssia keskihajonnan laskemiseen.
+    """
+
+    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ MUUTTUJATYYPEITTÄIN)
+
+    # Kokonaisluvut
+    alkioiden_lukumaara = len(korkeusvaihtelut)
+
+    # Liukuluvut
+    keskiarvo = laske_keskiarvo(korkeusvaihtelut)
+    summa = 0.0
+    varianssi = 0.0
+
+    for arvo in range(len(korkeusvaihtelut)):
+        summa += (korkeusvaihtelut[arvo] - keskiarvo) ** 2
+
+    varianssi = summa / (alkioiden_lukumaara - 1)
+
+    return varianssi
+
+
 def laske_keskihajonta(korkeusvaihtelut):
-    pass
+    """
+    Laskee keskihajonnan kutsumalla varianssia ja ottamalla siitä
+    neliöjuuren. Ottaa paramentrina listan, jossa arvot ovat. Palauttaa
+    keskihajonnan (tässä ohjelmassa kutsujana main()).
+    """
+
+    # MUUTTUJIEN ALUSTUKSET (AAKKOSJÄRJESTYKSESSÄ MUUTTUJATYYPEITTÄIN)
+
+    # Liukuluvut
+    keskihajonta = 0.0
+    varianssi = 0.0
+
+    varianssi = laske_varianssi(korkeusvaihtelut)
+    keskihajonta = sqrt(varianssi)
+
+    return keskihajonta
 
 
 def main():
@@ -113,6 +177,7 @@ def main():
 
     # Liukuluvut
     keskiarvo = 0.0
+    keskihajonta = 0.0
     maksimiarvo = 0.0
     mediaani = 0.0
     minimiarvo = 0.0
@@ -136,10 +201,10 @@ def main():
         stripattu_str_syotetty_arvo = str_syotetty_arvo.strip()
 
         if stripattu_str_syotetty_arvo == "" and i < 3:
-            print("Error: At least two measurements must be entered.")
+            print("Error: At least two measurements must be entered!")
             return 1
 
-        elif stripattu_str_syotetty_arvo == "" and i > 3:
+        elif stripattu_str_syotetty_arvo == "" and i >= 3:
             onko_syote_numero = False
             # Tämän jälkeen whilen ulkopuolella tulostetaan yhteenveto arvoista
 
@@ -157,11 +222,13 @@ def main():
     maksimiarvo = laske_maksimiarvo(korkeusvaihtelut)
     mediaani = laske_mediaani(korkeusvaihtelut)
     keskiarvo = laske_keskiarvo(korkeusvaihtelut)
+    keskihajonta = laske_keskihajonta(korkeusvaihtelut)
 
     print(f"Minimum: {minimiarvo:.2f} cm")
     print(f"Maximum: {maksimiarvo:.2f} cm")
     print(f"Median: {mediaani:.2f} cm")
     print(f"Mean: {keskiarvo:.2f} cm")
+    print(f"Deviation: {keskihajonta:.2f} cm")
 
 
 if __name__ == "__main__":

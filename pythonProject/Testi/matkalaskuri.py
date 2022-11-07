@@ -36,6 +36,8 @@ def main():
     print(f"Museum of Gdansk (opiskelija): {museum_of_gdansk_opiskelija} "
           f"euroa.")
     print(f"Museum of 1939 (opiskelija): {museum_of_1939_opiskelija} euroa.")
+    print(f"Old town: 0 euroa.")
+    print(f"Kirkot: yleensä 0e.")
     print(f"Yhteensä: {valinnaiset_kulut} euroa.")
     print()
     print(f"Kaikki yhteensä: {kaikki_yhteensa}")

@@ -28,11 +28,12 @@ sanakirjaa, jossa käsiteltävät tiedot ovat.
 
 """
 
-# Globaalit muuttujat
+# Globaalit vakiot
 LIIAN_LYHYT_KOMENTO = 2
 LOPETUSKOMENTO = "q"
 LOPETUSPALUUARVO = 1
 VAADITTU_MAARA_PUOLIPISTEITA_RIVILLA = 2
+PII = 3.14
 
 
 def avaa_tiedosto():
