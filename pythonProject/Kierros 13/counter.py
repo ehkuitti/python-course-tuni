@@ -31,23 +31,40 @@ class Counter:
         self.__current_value_label = Label(self.__mainwindow,
                                            text=self.__current_value,
                                            relief=GROOVE)
-        self.__current_value_label.pack()
+        self.__current_value_label.grid(row=0, column=0)
 
         self.__reset_button = Button(self.__mainwindow, text="Reset",
                                      command=self.reset)
-        self.__reset_button.pack()
+        self.__reset_button.grid(row=1, column=0)
+
+        self.__increase_button = Button(self.__mainwindow, text="Increase",
+                                        command=self.increase)
+        self.__increase_button.grid(row=1, column=1)
+
+        self.__decrease_button = Button(self.__mainwindow, text="Decrease",
+                                        command=self.decrease)
+        self.__decrease_button.grid(row=1, column=2)
 
         self.__quit_button = Button(self.__mainwindow, text="Quit",
                                     command=self.quit)
-        self.__quit_button.pack()
+        self.__quit_button.grid(row=1, column=3)
 
-    # TODO: Implement the rest of the needed methods here.
+        # TODO: Implement the rest of the needed methods here.
 
         self.__mainwindow.mainloop()
 
     def reset(self):
         self.__current_value = 0
         self.__current_value_label.config(text=self.__current_value)
+
+    def increase(self):
+        self.__current_value += 1
+        self.__current_value_label.config(text=self.__current_value)
+
+    def decrease(self):
+        self.__current_value -= 1
+        self.__current_value_label.config(text=self.__current_value)
+
     def quit(self):
         self.__mainwindow.destroy()
 
