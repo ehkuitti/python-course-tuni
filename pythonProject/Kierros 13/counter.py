@@ -12,7 +12,7 @@ from tkinter import *
 
 class Counter:
     def __init__(self):
-        self.__paaikkuna = Tk()
+        self.__mainwindow = Tk()
 
         # TODO: You have to creater one label and four buttons and store
         #       them in the following attributes:
@@ -26,18 +26,30 @@ class Counter:
         #       Make sure you name the components exactly as shown above,
         #       otherwise the automated tests will fail.
 
-        self.__current_value = 0
+        self.__current_value = 1
 
-        self.__quit_button = Button(self.__paaikkuna, text="Quit",
-                                    command=self.lopeta)
+        self.__current_value_label = Label(self.__mainwindow,
+                                           text=self.__current_value,
+                                           relief=GROOVE)
+        self.__current_value_label.pack()
+
+        self.__reset_button = Button(self.__mainwindow, text="Reset",
+                                     command=self.reset)
+        self.__reset_button.pack()
+
+        self.__quit_button = Button(self.__mainwindow, text="Quit",
+                                    command=self.quit)
         self.__quit_button.pack()
 
     # TODO: Implement the rest of the needed methods here.
 
-        self.__paaikkuna.mainloop()
+        self.__mainwindow.mainloop()
 
-    def lopeta(self):
-        self.__paaikkuna.destroy()
+    def reset(self):
+        self.__current_value = 0
+        self.__current_value_label.config(text=self.__current_value)
+    def quit(self):
+        self.__mainwindow.destroy()
 
 
 def main():

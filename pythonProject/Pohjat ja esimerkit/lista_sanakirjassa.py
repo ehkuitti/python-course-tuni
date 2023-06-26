@@ -1,6 +1,6 @@
 def main():
     hakemisto = {}
-    print("Syötä sana ja sivunumero (lopeta tyhjällä rivillä):")
+    print("Syötä sana ja sivunumero (quit tyhjällä rivillä):")
     while True:
         rivi = input()
         if rivi == "":
